@@ -7,8 +7,8 @@
         {
             $data=[];
             if($_GET){
-                $guia=new Guia_remision();
-                $data=$guia->get_guiaRemisionTodo();
+                $guia=new Guia();
+                $data=$guia->consultar_todo();
             }
             require_once('./views/Guia/motrar_guia.php');
         }

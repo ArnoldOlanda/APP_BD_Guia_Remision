@@ -1,5 +1,5 @@
 <?php
-
+	include_once("dbConnection.php");
 	class Guia_remision {
 		private $db;
 		
@@ -11,9 +11,10 @@
 		public function get_guiaRemisionTodo()
 		{
 			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[Create procedure Lista_GuiaRemision as SELECT * FROM Guia_Remision]
-			$sql = "EXECUTE Lista_GuiaRemision";
+			$sql = "call Lista_GuiaRemision";
 			$resultado = $this->db->query($sql);
-			while ($row = $resultado->fetch_assoc()) 
+			
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
 			{
 				$Guia_remision[] = $row;
 			}
