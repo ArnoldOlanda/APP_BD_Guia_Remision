@@ -52,18 +52,29 @@
 			}
 			return $Guia_remision;
 		}
-		public function get_guiaRemisionPorNombre($BoletaN)
+		public function get_guiaRemisionPorNombre($NombreCli)
 		{
-			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[Create procedure Lista_GuiaNroBoleta @numeroB char(12) as select * from Guia_Remision g inner join Boleta b on g.Nro_Boleta = b.Nro_Boleta where b.Nro_Boleta = @numeroB]
-			$resultado = $this->db->preparate("EXECUTE Lista_GuiaNroBoleta '"+$BoletaN+"'");
-			$resultado->execute($resultado,[$BoletaN]);
+			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[Create procedure Lista_GuiaPorNombreCliente @nombreCliente varchar(50) as SELECT * FROM Guia_Remision g inner join (SELECT RUC AS 'Num_doc',Nombre_Empresa AS 'Nombre' from  Cliente_juridico UNION  SELECT DNI,concat(Nombres,' ',Apellidos) FROM Cliente_Natural) c on g.RUC = c.Num_doc where c.Nombre like ('%'+@nombreCliente+'%');]
+			$resultado = $this->db->preparate("EXECUTE Lista_GuiaPorNombreCliente '"+$NombreCli+"'");
+			$resultado->execute($resultado,[$NombreCli]);
 			while ($row = $resultado->fetch_assoc()) 
 			{
 				$Guia_remision[] = $row;
 			}
 			return $Guia_remision;
 		}
-		public function get_guiaRemisionporFecha(yy,zz)
+		public function get_guiaRemisionPorConductor($NombreCli)
+		{
+			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[Create procedure Lista_GuiaPorNombreCliente @nombreCliente varchar(50) as SELECT * FROM Guia_Remision g inner join (SELECT RUC AS 'Num_doc',Nombre_Empresa AS 'Nombre' from  Cliente_juridico UNION  SELECT DNI,concat(Nombres,' ',Apellidos) FROM Cliente_Natural) c on g.RUC = c.Num_doc where c.Nombre like ('%'+@nombreCliente+'%');]
+			$resultado = $this->db->preparate("EXECUTE Lista_GuiaPorNombreCliente '"+$NombreCli+"'");
+			$resultado->execute($resultado,[$NombreCli]);
+			while ($row = $resultado->fetch_assoc()) 
+			{
+				$Guia_remision[] = $row;
+			}
+			return $Guia_remision;
+		}
+		public function get_guiaRemisionporFecha($anno,$mes)
 		{
 			$sql = "select * from Guia_Remision g inner join Cliente_Natural c on g.Dni_Cliente = c.DNI where c.Apellidos='"+ape+"'";
 			$resultado = $this->db->query($sql);
