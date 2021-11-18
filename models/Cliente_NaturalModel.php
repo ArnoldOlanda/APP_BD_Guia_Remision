@@ -1,20 +1,48 @@
 <?php
-	class Cliente_NaturalModel{
-		
-		private $GuiaRemision;//nombre de base de datos
-		
+	include_once("dbConnection.php");
+	class Cliente{
+		private $db;
 		
 		public function __construct(){
-			$this->GuiaRemision=Conectar::conexion();//conecta con la base de datos
-			//$this->Cuerpo_Guia=array();
+			$this->db = BD::crearInstancia();
 		}
-		public function get_Cliente_NaturalModel(){
-			$sql="SELECT * FROM ClienteNatural";
-			$resultado=$this->GuiaRemision->query($sql);
-			
-			return $this->resultado;
+		public function get_Clientes_naturales(){
+			$sql="call Lista_cliente_natural";
+			$resultado=$this->db->query($sql);
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
+			{
+				$devu[] = $row;
+			}
+			return $devu;
+		}
+		public function get_Clientes_juridicos(){
+			$sql="call Lista_cliente_juridico";
+			$resultado=$this->db->query($sql);
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
+			{
+				$devu[] = $row;
+			}
+			return $devu;
+		}
+		public function crear_Clientes_natural(){
+			$sql="call Lista_cliente_natural";
+			$resultado=$this->db->query($sql);
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
+			{
+				$devu[] = $row;
+			}
+			return $devu;
 		}
 		
+		public function crear_Clientes_juridico(){
+			$sql="call Lista_cliente_juridico";
+			$resultado=$this->db->query($sql);
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
+			{
+				$devu[] = $row;
+			}
+			return $devu;
+		}
 		
 	}
 ?>

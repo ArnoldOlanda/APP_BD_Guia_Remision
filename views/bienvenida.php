@@ -9,21 +9,21 @@
     <body>
         <div class="sidebar">
            <div class="sidebar-brand">
-              <a href="./?ctrl=paginas&acc=inicio" ><span class="lab la-accusoft"><h1>GDI</h1></span> </a>
+              <a href="./?ctrl=paginas&acc=inicio" ><span class="lab la-accusoft"><h1>G	DI</h1></span> </a>
            </div>
 
            <div class="sidebar-menu"> 
                <ul>
                 <li>
-                    <a href="./?ctrl=guias&acc=insertar" ><span class="las la-igloo"></span>
-                    <span>Ingresar GUia</span></a>
+                    <a href="./?ctrl=guias&acc=insertar" <?PHP if($_GET["ctrl"]=='guias' && $_GET["acc"]=='insertar') echo "class='active'"?>><span class="las la-igloo"></span>
+                    <span>Ingresar Guia</span></a>
                 </li>
                 <li>
-                    <a href="./?ctrl=guias&acc=listar" ><span class="las la-users"></span>
+                    <a href="./?ctrl=guias&acc=listar" <?PHP if($_GET["ctrl"]=='guias' && $_GET["acc"]=='listar') echo "class='active'"?>><span class="las la-users"></span>
                     <span>Consultar Guia</span></a>
                 </li>
                 <li>
-                    <a href="Clientes.html"><span class="las la-clipboard-list"></span>
+                    <a href="./?ctrl=clientes&acc=listar"><span class="las la-clipboard-list"></span>
                     <span>Clientes</span></a>
                 </li>
                 <li>
@@ -44,13 +44,15 @@
            </div>
         </div>
         <div class="main-content">
-                        <main>
+			<header>
+                <h1>
+                    <?php ECHO $_GET["ctrl"]?>
+                </h1>
+            </header>
+            <main>
                 <div>
 				<?php include_once ("router.php") ?>
-				</div>
-
-
-                </div>
+				</div>	
             </main>
         </div>
         

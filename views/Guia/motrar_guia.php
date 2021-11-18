@@ -10,10 +10,9 @@
         <thead>
             <tr>
                 <th>Nro_Guia</th>
+                <th>Placa</th>
                 <th>RUC</th>
-                <th>DNI_Cliente</th>
-                <th>Cod_Tipo_Comprobante</th>
-                <th>Cod_Motivo_Traslado</th>
+               
             </tr>
         </thead>
         <tbody>

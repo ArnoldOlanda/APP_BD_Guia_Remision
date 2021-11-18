@@ -1,28 +1,31 @@
 <?php
-    require_once("./models/clienteNaturalModel.php");
-    require_once("./models/clienteJuridicoModel.php");
+    require_once("./models/Cliente_NaturalModel.php");
 
     class ClientesController{
         public function listar(){
-            $data=[][];
-            if($_GET['tipoCliente']=='Natural'){
-                $clienteNatural=new ClienteNatural();
-                $data=$clienteNatural->consultar_todo();
-            }else{
-                $clienteJuridico=new ClienteJuridico();
-                $data=$clienteJuridico->consultar_todo();
-            }
-            require_once("./views/Clientes/index.php");
+         
+			$cliente=new Cliente();
+          
+            $dataN=$cliente->get_Clientes_naturales();
+    
+            $dataJ=$cliente->get_Clientes_juridicos();
+            
+            require_once("./views/Cliente/listar.php");
         }
         public function insertar(){
+			$cliente=new Cliente();
             if($_POST['tipoCliente']=='Natural'){
-                $clienteNatural=new ClienteNatural();
+                $dni= $_POST["dni"];
+				$nombre= $_POST;
+				$direccion= $_POST;
+				$telefono= $_POST;
+				
                 //Set all data of post method to object of model
-                $clienteNatural->registrar_BD();
+                $cliente->crear_Clientes_natural($dni,$nombre,$direccion);
             }else{
-                $clienteJuridico=new ClienteJuridico();
+               
                 //Set all data of post method to object of model
-                $clienteNatural->registrar_BD();
+                $cliente->crear_Clientes_juridico();
             }
             require_once("./views/Clientes/create.php");
         }
