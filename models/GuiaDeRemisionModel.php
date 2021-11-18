@@ -63,11 +63,11 @@
 			}
 			return $Guia_remision;
 		}
-		public function get_guiaRemisionPorConductor($NombreCli)
+		public function get_guiaRemisionPorConductor($NombreCon)
 		{
-			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[Create procedure Lista_GuiaPorNombreCliente @nombreCliente varchar(50) as SELECT * FROM Guia_Remision g inner join (SELECT RUC AS 'Num_doc',Nombre_Empresa AS 'Nombre' from  Cliente_juridico UNION  SELECT DNI,concat(Nombres,' ',Apellidos) FROM Cliente_Natural) c on g.RUC = c.Num_doc where c.Nombre like ('%'+@nombreCliente+'%');]
-			$resultado = $this->db->preparate("EXECUTE Lista_GuiaPorNombreCliente '"+$NombreCli+"'");
-			$resultado->execute($resultado,[$NombreCli]);
+			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[Create procedure Lista_GuiaPorConductor @nombresConductor varchar(40) as SELECT * FROM Guia_Remision g inner join (select concat(Apellidos,' ', Nombres) as nombreC,Licencia_Conducir from Transportista) c on g.Nro_Licencia = c.Licencia_Conducir where c.nombreC like ('%'+@nombresConductor+'%');]
+			$resultado = $this->db->preparate("EXECUTE Lista_GuiaPorConductor '"+$NombreCon+"'");
+			$resultado->execute($resultado,[$NombreCon]);
 			while ($row = $resultado->fetch_assoc()) 
 			{
 				$Guia_remision[] = $row;
