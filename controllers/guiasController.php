@@ -15,17 +15,17 @@
         public function insertar()
         {
             if($_POST){
-                $guia=new Guia();
-                $guia->registrar_BD();
+                //$guia=new Guia_remision();
+                //$guia->registrar_BD();
                 header('Location:index');
             }
-            require_once('./views/Guia/create.php');
+            require_once('./views/IngresarGuia.php');
         }
         public function buscar()
         {
             if($_GET){
-                $guia=new Guia();
-                $data=$guia->consultar($_GET['nroGuia']);
+                //$guia=new Guia_remision();
+                //$data=$guia->consultar($_GET['nroGuia']);
             }
             require_once('./views/Guia/buscar.php');
         }
