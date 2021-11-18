@@ -6,8 +6,8 @@
 
 		public function __construct(){
 			$this->db = BD::crearInstancia();
-			
 		}
+
 		public function get_guiaRemisionTodo()
 		{
 			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[Create procedure Lista_GuiaRemision as SELECT * FROM Guia_Remision]
@@ -77,12 +77,12 @@
 		}
 		public function get_guiaRemisionporFecha($anno,$mes)
 		{
-			$sql = "select * from Guia_Remision g inner join Cliente_Natural c on g.Dni_Cliente = c.DNI where c.Apellidos='"+ape+"'";
-			$resultado = $this->db->query($sql);
-			while ($row = $resultado->fetch_assoc()) 
-			{
-				$this ->Guia_remision[] = $row;
-			}
+			//$sql = "select * from Guia_Remision g inner join Cliente_Natural c on g.Dni_Cliente = c.DNI where c.Apellidos='"++"'";
+			//$resultado = $this->db->query($sql);
+			//while ($row = $resultado->fetch_assoc()) 
+			//{
+			//	$this ->Guia_remision[] = $row;
+			//}
 			return $this->Guia_remision;
 		}
 
