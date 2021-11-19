@@ -2,8 +2,6 @@
 	include_once("dbConnection.php");
 	class Guia_remision {
 		private $db;
-		
-
 		public function __construct(){
 			$this->db = BD::crearInstancia();
 		}
