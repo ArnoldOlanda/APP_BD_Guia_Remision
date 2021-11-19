@@ -2,16 +2,17 @@
 	include_once("dbConnection.php");
 	class Guia_remision {
 		private $db;
+		
+
 		public function __construct(){
 			$this->db = BD::crearInstancia();
+			
 		}
-
 		public function get_guiaRemisionTodo()
 		{
-			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[Create procedure Lista_GuiaRemision as SELECT * FROM Guia_Remision]
-			$sql = "call Lista_GuiaRemision";
+			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[create procedure Lista_GuiaRemision() SELECT g.Nro_Guia , g.Nro_Boleta as "Numero de Boleta",g.Nro_Factura, concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision', concat_ws( '-',g.FT_Dia,g.FT_Mes,g.FT_Año) as 'Fecha traslado', concat_ws(' ',c.nombres,c.apellidos) 'Cliente natural', j.nombre_empresa 'Cliente juridico', d1.direccion 'Punto partida',d2.direccion 'Punto llegada', m.Motivo FROM guia_remision g left JOIN boleta b ON g.Nro_Boleta = b.Nro_Boleta left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo left join cliente_natural c on g.Dni_Cliente=c.DNI left join cliente_juridico j on g.RUC=j.RUC left join motivo_traslado m on g.cod_motivo_traslado=m.codigo;]
+			$sql = "call Lista_GuiaRemision();";
 			$resultado = $this->db->query($sql);
-			
 			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
 			{
 				$Guia_remision[] = $row;
@@ -20,10 +21,10 @@
 		}
 		public function get_guiaRemisionNroGuia($GuiaNumero)
 		{
-			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[Create procedure Lista_GuiaNroGuia @codigo char(11) as select * from Guia_Remision where Nro_Guia = @codigo]
-			$resultado = $this->db->preparate("EXECUTE Lista_GuiaNroGuia '"+$GuiaNumero+"'");
+			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[create procedure Lista_GuiaRemisionPorNroGuia(IN Codigo_G char(11)) SELECT g.Nro_Guia , g.Nro_Boleta as "Numero de Boleta",g.Nro_Factura, concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision', concat_ws( '-',g.FT_Dia,g.FT_Mes,g.FT_Año) as 'Fecha traslado', concat_ws(' ',c.nombres,c.apellidos) 'Cliente natural', j.nombre_empresa 'Cliente juridico', d1.direccion 'Punto partida',d2.direccion 'Punto llegada', m.Motivo FROM guia_remision g left JOIN boleta b ON g.Nro_Boleta = b.Nro_Boleta left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo left join cliente_natural c on g.Dni_Cliente=c.DNI left join cliente_juridico j on g.RUC=j.RUC left join motivo_traslado m on g.cod_motivo_traslado=m.codigo Where g.Nro_Guia = Codigo_G;]
+			$resultado = $this->db->preparate("CALL Lista_GuiaRemisionPorNroGuia('"+$GuiaNumero+"')");
 			$resultado->execute($resultado,[$GuiaNumero]);
-			while ($row = $resultado->fetch_assoc()) 
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
 			{
 				$Guia_remision[] = $row;
 			}
@@ -31,10 +32,10 @@
 		}
 		public function get_guiaRemisionNroFactura($FacturaN)
 		{
-			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[Create procedure Lista_GuiaNroFactura @numeroF char(12) as select * from Guia_Remision g inner join Factura f on g.Nro_Factura = f.Nro_Factura where f.Nro_Factura = @numeroF]
-			$resultado = $this->db->preparate("EXECUTE Lista_GuiaNroFactura '"+$FacturaN+"'");
+			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[create procedure Lista_GuiaRemisionPorFactura(IN Codigo_F char(12)) SELECT g.Nro_Guia , g.Nro_Boleta as "Numero de Boleta",g.Nro_Factura, concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision', concat_ws( '-',g.FT_Dia,g.FT_Mes,g.FT_Año) as 'Fecha traslado', concat_ws(' ',c.nombres,c.apellidos) 'Cliente natural', j.nombre_empresa 'Cliente juridico', d1.direccion 'Punto partida',d2.direccion 'Punto llegada', m.Motivo FROM guia_remision g left JOIN boleta b ON g.Nro_Boleta = b.Nro_Boleta left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo left join cliente_natural c on g.Dni_Cliente=c.DNI left join cliente_juridico j on g.RUC=j.RUC left join motivo_traslado m on g.cod_motivo_traslado=m.codigo left join factura f on g.Nro_Factura = f.Nro_Factura Where f.Nro_Factura = Codigo_F;]
+			$resultado = $this->db->preparate("CALL Lista_GuiaRemisionPorFactura('"+$FacturaN+"')");
 			$resultado->execute($resultado,[$FacturaN]);
-			while ($row = $resultado->fetch_assoc()) 
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
 			{
 				$Guia_remision[] = $row;
 			}
@@ -42,10 +43,10 @@
 		}
 		public function get_guiaRemisionNroBoleta($BoletaN)
 		{
-			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[Create procedure Lista_GuiaNroBoleta @numeroB char(12) as select * from Guia_Remision g inner join Boleta b on g.Nro_Boleta = b.Nro_Boleta where b.Nro_Boleta = @numeroB]
-			$resultado = $this->db->preparate("EXECUTE Lista_GuiaNroBoleta '"+$BoletaN+"'");
+			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[create procedure Lista_GuiaRemisionPorBoleta(IN Codigo_B char(12)) SELECT g.Nro_Guia , g.Nro_Boleta as "Numero de Boleta",g.Nro_Factura, concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision', concat_ws( '-',g.FT_Dia,g.FT_Mes,g.FT_Año) as 'Fecha traslado', concat_ws(' ',c.nombres,c.apellidos) 'Cliente natural', j.nombre_empresa 'Cliente juridico', d1.direccion 'Punto partida',d2.direccion 'Punto llegada', m.Motivo FROM guia_remision g left JOIN boleta b ON g.Nro_Boleta = b.Nro_Boleta left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo left join cliente_natural c on g.Dni_Cliente=c.DNI left join cliente_juridico j on g.RUC=j.RUC left join motivo_traslado m on g.cod_motivo_traslado=m.codigo left join factura f on g.Nro_Factura = f.Nro_Factura Where b.Nro_Boleta = Codigo_B;]
+			$resultado = $this->db->preparate("CALL Lista_GuiaRemisionPorBoleta('"+$BoletaN+"')");
 			$resultado->execute($resultado,[$BoletaN]);
-			while ($row = $resultado->fetch_assoc()) 
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
 			{
 				$Guia_remision[] = $row;
 			}
@@ -53,10 +54,10 @@
 		}
 		public function get_guiaRemisionPorNombre($NombreCli)
 		{
-			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[Create procedure Lista_GuiaPorNombreCliente @nombreCliente varchar(50) as SELECT * FROM Guia_Remision g inner join (SELECT RUC AS 'Num_doc',Nombre_Empresa AS 'Nombre' from  Cliente_juridico UNION  SELECT DNI,concat(Nombres,' ',Apellidos) FROM Cliente_Natural) c on g.RUC = c.Num_doc where c.Nombre like ('%'+@nombreCliente+'%');]
-			$resultado = $this->db->preparate("EXECUTE Lista_GuiaPorNombreCliente '"+$NombreCli+"'");
+			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[create procedure Lista_GuiaPorNombreCliente(IN NCliente varchar(50)) SELECT g.Nro_Guia , g.Nro_Boleta as "Numero de Boleta",g.Nro_Factura, concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision', concat_ws( '-',g.FT_Dia,g.FT_Mes,g.FT_Año) as 'Fecha traslado', concat_ws(' ',c.nombres,c.apellidos) 'Cliente natural', j.nombre_empresa 'Cliente juridico', d1.direccion 'Punto partida',d2.direccion 'Punto llegada', m.Motivo FROM guia_remision g left JOIN boleta b ON g.Nro_Boleta = b.Nro_Boleta left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo left join cliente_natural c on g.Dni_Cliente=c.DNI left join cliente_juridico j on g.RUC=j.RUC left join motivo_traslado m on g.cod_motivo_traslado=m.codigo left join factura f on g.Nro_Factura = f.Nro_Factura Where concat_ws(' ',c.nombres,c.apellidos) like concat('%',NCliente,'%') UNION SELECT g.Nro_Guia , g.Nro_Boleta as "Numero de Boleta",g.Nro_Factura, concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision', concat_ws( '-',g.FT_Dia,g.FT_Mes,g.FT_Año) as 'Fecha traslado', concat_ws(' ',c.nombres,c.apellidos) 'Cliente natural', j.nombre_empresa 'Cliente juridico', d1.direccion 'Punto partida',d2.direccion 'Punto llegada', m.Motivo FROM guia_remision g left JOIN boleta b ON g.Nro_Boleta = b.Nro_Boleta left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo left join cliente_natural c on g.Dni_Cliente=c.DNI left join cliente_juridico j on g.RUC=j.RUC left join motivo_traslado m on g.cod_motivo_traslado=m.codigo left join factura f on g.Nro_Factura = f.Nro_Factura Where j.nombre_empresa like concat('%',NCliente,'%');]
+			$resultado = $this->db->preparate("CALL Lista_GuiaPorNombreCliente('"+$NombreCli+"')");
 			$resultado->execute($resultado,[$NombreCli]);
-			while ($row = $resultado->fetch_assoc()) 
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
 			{
 				$Guia_remision[] = $row;
 			}
@@ -64,23 +65,24 @@
 		}
 		public function get_guiaRemisionPorConductor($NombreCon)
 		{
-			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[Create procedure Lista_GuiaPorConductor @nombresConductor varchar(40) as SELECT * FROM Guia_Remision g inner join (select concat(Apellidos,' ', Nombres) as nombreC,Licencia_Conducir from Transportista) c on g.Nro_Licencia = c.Licencia_Conducir where c.nombreC like ('%'+@nombresConductor+'%');]
-			$resultado = $this->db->preparate("EXECUTE Lista_GuiaPorConductor '"+$NombreCon+"'");
+			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[create procedure Lista_GuiaPorConductor(IN NConductor varchar(50) ) SELECT g.Nro_Guia , g.Nro_Boleta as "Numero de Boleta",g.Nro_Factura, concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision', concat_ws( '-',g.FT_Dia,g.FT_Mes,g.FT_Año) as 'Fecha traslado', concat_ws(' ',c.nombres,c.apellidos) 'Cliente natural', concat_ws(' ', t.Nombres,t.Apellidos) 'Conductor', j.nombre_empresa 'Cliente juridico', d1.direccion 'Punto partida',d2.direccion 'Punto llegada', m.Motivo FROM guia_remision g  left JOIN boleta b ON g.Nro_Boleta = b.Nro_Boleta left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo left join cliente_natural c on g.Dni_Cliente=c.DNI left join cliente_juridico j on g.RUC=j.RUC left join motivo_traslado m on g.cod_motivo_traslado=m.codigo left join factura f on g.Nro_Factura = f.Nro_Factura left join transportista t on g.Nro_Licencia = t.Licencia_Conducir where concat_ws(' ', t.Nombres,t.Apellidos) like concat('%',NConductor,'%');]
+			$resultado = $this->db->preparate("CALL Lista_GuiaPorConductor('"+$NombreCon+"')");
 			$resultado->execute($resultado,[$NombreCon]);
-			while ($row = $resultado->fetch_assoc()) 
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
 			{
 				$Guia_remision[] = $row;
 			}
 			return $Guia_remision;
 		}
-		public function get_guiaRemisionporFecha($anno,$mes)
+		public function get_guiaRemisionporFecha($mes,$anno)
 		{
-			//$sql = "select * from Guia_Remision g inner join Cliente_Natural c on g.Dni_Cliente = c.DNI where c.Apellidos='"++"'";
-			//$resultado = $this->db->query($sql);
-			//while ($row = $resultado->fetch_assoc()) 
-			//{
-			//	$this ->Guia_remision[] = $row;
-			//}
+			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[create procedure Lista_GuiaPorMesAño(In FMes char(2), Faño char(4) ) SELECT g.Nro_Guia , g.Nro_Boleta as "Numero de Boleta",g.Nro_Factura, concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision', concat_ws( '-',g.FT_Dia,g.FT_Mes,g.FT_Año) as 'Fecha traslado', concat_ws(' ',c.nombres,c.apellidos) 'Cliente natural', concat_ws(' ', t.Nombres,t.Apellidos) 'Conductor', j.nombre_empresa 'Cliente juridico', d1.direccion 'Punto partida',d2.direccion 'Punto llegada', m.Motivo FROM guia_remision g  left JOIN boleta b ON g.Nro_Boleta = b.Nro_Boleta left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo left join cliente_natural c on g.Dni_Cliente=c.DNI left join cliente_juridico j on g.RUC=j.RUC left join motivo_traslado m on g.cod_motivo_traslado=m.codigo left join factura f on g.Nro_Factura = f.Nro_Factura left join transportista t on g.Nro_Licencia = t.Licencia_Conducir where g.FE_Mes = FMes  and g.FE_Año = Faño;
+			$resultado = $this->db->preparate("CALL Lista_GuiaPorMesAño ('"+$mes+"','"+$anno+"')");
+			$resultado->execute($resultado,[$mes,$anno]);
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
+			{
+				$this ->Guia_remision[] = $row;
+			}
 			return $this->Guia_remision;
 		}
 
