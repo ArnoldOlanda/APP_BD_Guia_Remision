@@ -1,32 +1,35 @@
 <?php
-
+	include_once("dbConnection.php");
 	class Empresa_Transportista {
 		private $db;
-		private $Empresa_Transportista;
+		
 
 		public function __construct(){
 			$this->db = BD::crearInstancia();
-			$this->Empresa_Transportista = array();
+			
 		}
-		public function get_guiaRemisionTodo()
+		public function get_EmpresaTransportista()
 		{
-			$sql = "select * from Empresa_Transportista";
+			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[create procedure Lista_EmpresaTransportista() select * from Empresa_Transportista;]
+			$sql = "call Lista_EmpresaTransportista();";
 			$resultado = $this->db->query($sql);
-			while ($row = $resultado->fetch_assoc()) 
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
 			{
-				$this ->Empresa_Transportista[] = $row;
+				$devuEmpreT[] = $row;
 			}
-			return $this->Empresa_Transportista;
+			return $devuEmpreT;
 		}
-		public function get_guiaRemisionRUC(yzz)
+		public function get_EmpresaTransportistaPorRUC($RUCT)
 		{
-			$sql = "select * from Empresa_Transportista where RUC='"+yzz+"'";
-			$resultado = $this->db->query($sql);
-			while ($row = $resultado->fetch_assoc()) 
+			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[create procedure Lista_EmpresaTransportistaPorRUC(IN RUCT char(11)) select * from empresa_transportista where RUC = RUCT;]
+			$resultado = $this->db->preparate("call Lista_EmpresaTransportistaPorRUC('"+$RUCT+"')");
+			$resultado->execute($resultado,[$RUCT]);
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
 			{
-				$this ->Empresa_Transportista[] = $row;
+				$devuEmpreT[] = $row;
 			}
-			return $this->Empresa_Transportista;
+			return $devuEmpreT;
+
 		}
 
 

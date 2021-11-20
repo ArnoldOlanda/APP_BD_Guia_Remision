@@ -1,7 +1,12 @@
-<body>
-    <h3>Guias de remision</h3>
-
-    <table width="100%">
+<div id="page-head">
+    <div class="pad-all text-center">
+        <h3 style="font-size:30px">Consultar Productos</h3>
+        <br>
+    </div>
+</div>
+<div id="page-content">
+    <div class="pad-all text-center">
+        <table width="100%">
         <thead>
             <tr>
                 <th>Nro Guia</th>
@@ -43,5 +48,7 @@
 			?>
 
         </tbody>
-    </table>
-</body>
+        </table>
+    </div>
+</div>
+

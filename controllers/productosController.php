@@ -8,7 +8,7 @@
 			$producto = new Producto();
 			$result = $producto->get_Productos();
 			
-			require_once "views/Producto/listar.php";
+			require_once "views/Producto/listarProductos.php";
 		}
 		
 		public function createOrModify(){

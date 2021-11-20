@@ -2,16 +2,23 @@
     require_once("./models/Cliente_NaturalModel.php");
 
     class ClientesController{
-        public function listar(){
+        public function listar_natural(){
          
 			$cliente=new Cliente();
           
             $dataN=$cliente->get_Clientes_naturales();
-    
+                
+            require_once("./views/Cliente/listarClienteNatural.php");
+        }
+        public function listar_juridico(){
+         
+			$cliente=new Cliente();
+             
             $dataJ=$cliente->get_Clientes_juridicos();
             
-            require_once("./views/Cliente/listar.php");
+            require_once("./views/Cliente/listarClienteJuridico.php");
         }
+
         public function insertar(){
 			$cliente=new Cliente();
             if($_POST['tipoCliente']=='Natural'){

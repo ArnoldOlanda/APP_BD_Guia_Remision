@@ -9,5 +9,5 @@
             $action=$_GET['acc'];
         }
     }
-    require_once("views/bienvenida.php");
+    require_once("views/index.php");
 ?>
