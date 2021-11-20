@@ -25,7 +25,7 @@
 
                 <!--Brand logo & name-->
                 <div class="navbar-header">
-                    <a href="index.html" class="navbar-brand">
+                    <a href="./?ctrl=paginas&acc=inicio" class="navbar-brand">
                         <img src="img\logo.png" alt="Nifty Logo" class="brand-icon">
                         <div class="brand-title">
                             <span class="brand-text">GDI</span>

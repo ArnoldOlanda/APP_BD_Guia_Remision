@@ -1,76 +1,31 @@
+﻿<div id="page-head">
+    <div class="pad-all text-center">
+        <h3 style="font-size:30px">Ingresar Guia</h3>
+    </div>
+</div>
+<!--Page content-->
+<div id="page-content">
+    </br>
+    </br>
+    </br>
+    </br>
+    <div class="pad-all text-center">
+        <span style="font-size:20px; padding-right: 5.5rem">Numero Guia </span><input type="text" id="Nro_Guia"><br>
+        <span style="font-size:20px; padding-right: 4.5rem">Fecha Emision</span><input type="date" id="Fecha_Emision" value="2021-11-19" min="2021-11-19" max="2030-12-31"><br>
+        <span style="font-size:20px; padding-right: 4.0rem">Fecha Traslado</span><input type="date" id="Fecha_Traslado" value="2021-11-19" min="2021-11-19" max="2030-12-31"><br>
+        <span style="font-size:20px; padding-right: 5.5rem">Punto Partida</span><input type="text" id="Punto_Partida"><br>
+        <span style="font-size:20px; padding-right: 5.0rem">Punto Llegada</span><input type="text" id="Punto_Llegada"><br>
+        <span style="font-size:20px; padding-right: 2.7rem">Numero Licencia </span><input type="text" id="Nro_Licencia"><br>
+        <span style="font-size:20px; padding-right: 2rem">RUC Transportista</span><input type="text" id="RUC_Transportista"><br>
+        <span style="font-size:20px; padding-right: 2.2rem">Tipo Comprobante</span><input type="text" id="Tipo_Comprobante"><br>
+        <span style="font-size:20px; padding-right: 4rem">Motivo Traslado</span><input type="text" id="Motivo_Traslado"><br>
+        <span style="font-size:20px; padding-right: 1rem">Firma Responsable</span><input type="text" id="Firma_Responsable"><br>
+        <span style="font-size:20px; padding-right: 6.5rem">Firma Cliente</span><input type="text" id="Firma_Cliente"><br>
+        <span style="font-size:20px; padding-right: 4.7rem">Nombre Cliente</span><input type="text" id="Nombre_Conf_CLiente"><br>
+        <span style="font-size:20px; padding-right: 4.2rem">Numero Factura</span><input type="text" id="Nro_Factura"><br>
+        <span style="font-size:20px; padding-right: 5.5rem">Numero Boleta</span><input type="text" id="Nro_Boleta"><br>
+        <span style="font-size:20px; padding-right: 14rem">RUC</span><input type="text" id="RUC"><br>
+        <span style="font-size:20px; padding-right: 5rem">DNI del Cliente</span><input type="text" id="DNI_Cliente"><br>
+    </div>
 
-<!DOCTYPE html>
-
-<html >
-<head>
-    <title></title>
-    <link rel="stylesheet"  type="text/css" href="estito.css"/>
-    <style type="text/css">
-        .auto-style2 {
-            height: 744px;
-            margin-left: 0px;
-        }
-        .auto-style4 {
-            height: 645px;
-        }
-    </style>
-    </head>
-<body class="auto-style2">
-    <form id="form1" >
-        <div style="background-color:#5CF1C4;">
-            <br />
-            <h1 class="titles">Ingresar Guia </h1>
-            
-        </div>
-        <div class="auto-style4">
-            <br />
-            <a class="center">Nro Guia</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:TextBox ID="Nro_Guia"></asp:TextBox>
-             <br />
-            <a class="center">Fecha Emision Año</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:TextBox ID="FE_Ano" ></asp:TextBox>
-             <br />
-            <a class="center">Fecha Emision Dia</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:TextBox ID="FE_Dia" ></asp:TextBox>
-             <br />
-            <a class="center">Fecha Emision Mes</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="FE_Mes" ></asp:TextBox>
-             <br />
-            <a class="center">Fecha traslado Año</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="FT_Año" ></asp:TextBox>
-             <br />
-            <a class="center">Fecha traslado Mes</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:TextBox ID="FT_Mes" ></asp:TextBox>
-            <br />
-            <a class="center">Fecha Emision Dia</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="FT_Dia" ></asp:TextBox>
-             <br />
-            <a class="center">Cod_Punto_Partida</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="Cod_Punto_Partida" </asp:TextBox>
-             <br />
-            <a class="center">Cod_Punto_Llegada</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:TextBox ID="Cod_Punto_Llegada" </asp:TextBox>
-             <br />
-            <a class="center">Nro_Licencia</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="Nro_Licencia" ></asp:TextBox>
-             <br />
-            <a class="center">Placa</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="Placa" ></asp:TextBox>
-             <br />
-            <a class="center">Ruc_Transportista</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:TextBox ID="Ruc_Transportista" ></asp:TextBox>
-             <br />
-            <a class="center">Cod_Tipo_Comprobante</a>&nbsp;<asp:TextBox ID="Cod_Tipo_Comprobante" runat="server"></asp:TextBox>
-             <br />
-            <a class="center">Cod_Motivo_Traslado</a>&nbsp; &nbsp;<asp:TextBox ID="Cod_Motivo_Traslado" runat="server"></asp:TextBox>
-             <br />
-            <a class="center">Firma_Responsable</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:TextBox ID="Firma_Responsable" runat="server"></asp:TextBox>
-             <br />
-            <a class="center">Firma_Cliente</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:TextBox ID="Firma_Cliente" runat="server"></asp:TextBox>
-            <br />
-            <a class="center">Nombre_Conf_Cliente</a>&nbsp;&nbsp;&nbsp; &nbsp;<asp:TextBox ID="Nombre_Conf_Cliente" runat="server"></asp:TextBox>
-             <br />
-            <a class="center">Nro_Factura</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="Nro_Factura" ></asp:TextBox>
-             <br />
-            <a class="center">Nro_Boleta</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:TextBox ID="Nro_Boleta" ></asp:TextBox>
-             <br />
-            <a class="center">RUC</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:TextBox ID="RUC" ></asp:TextBox>
-             <br />
-            <a class="center">Dni_Cliente</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:TextBox ID="Dni_Cliente" ></asp:TextBox>
-            <br />
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="Aceptar" Text="Aceptar" />
-        </div>
-       
-    </form>
-</body>
-</html>
+</div>

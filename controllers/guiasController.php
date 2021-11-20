@@ -28,7 +28,7 @@
                 //$guia->registrar_BD();
                 header('Location:index');
             }
-            require_once('./views/IngresarGuia.php');
+            require_once('./views/Guia/ingresarGuia.php');
         }
         public function buscar()
         {

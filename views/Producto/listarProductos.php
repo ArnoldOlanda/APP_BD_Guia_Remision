@@ -1,7 +1,7 @@
 ﻿<div id="page-head">
     <div class="pad-all text-center">
         <h3 style="font-size:30px">Consultar Productos</h3>
-        </p1>
+        <button id="btnOpenModal" class="btn">Nuevo</button>
     </div>
 </div>
 <!--Page content-->
