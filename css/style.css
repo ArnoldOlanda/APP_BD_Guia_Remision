@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 :root {
     --main-color: #06A52B;
+    --main-color-hover: #22bb46;
     --color-dark: #1D2231;
     --text-grey: #8390A2;
 }
@@ -14,7 +15,7 @@
     font-family: 'Poppins',sans-serif;
 }
 .sidebar {
-    width: 345px;
+    width: 15%;
     position: fixed;
     left: 0;
     top:0 ;
@@ -25,7 +26,7 @@
 }
 
 .sidebar-brand{
-    height: 90px;
+    height: 70px;
     padding: 1rem 0rem 1rem 2rem;
     color: #fff;
 }
@@ -42,21 +43,26 @@
 
 .sidebar-menu li{
     width: 100%;
-    margin-bottom: 1.7rem;
+    margin-bottom: .5rem;
     padding-left: 1rem;
 }
 
 .sidebar-menu a{
     padding-left: 1rem;
     display:  block;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
     color: #fff;
-    font-size: 1.1rem;
+    font-size: .9rem;
+    transition: all .1s ease;
+}
+.sidebar-menu a:hover{
+    border-radius: 30px 0px 0px 30px;
+    background: var(--main-color-hover);
 }
 
 .sidebar-menu a.active{
     background: #fff;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
     color: var(--main-color);
     border-radius: 30px 0px 0px 30px;
 }
@@ -66,7 +72,8 @@
 }
 
 .main-content{
-    margin-left: 345px;
+    margin-left: 15%;
+    width:85%;
 }
 
 header{
@@ -74,9 +81,9 @@ header{
     justify-content: space-between;
     padding: 1rem 1.5rem;
     box-shadow: 2px 2px 5x rgba(0, 0, 0, 0.2);
+    /*background:#fff;*/
     position: fixed;
-    left: 345px;
-    width:calc(100% - 345px);
+    width:85%;
     top: 0;
     z-index: 100;
 }
@@ -86,7 +93,7 @@ header h2{
 }
 
 header label span{
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     padding-right: 1rem;
 }
 
@@ -130,7 +137,7 @@ header label span{
 main{
     margin-top: 85px;
     padding: 2rem 1.5rem;
-    background: #f1f5f9;
+    background: #e2e2e2;
     min-height: calc(100vh - 90px);
 }
 
@@ -155,4 +162,128 @@ main{
 }
 .card-single div:first-child span{
     color: var(--main-color);
+}
+
+table{
+    font-size:12px;
+    border-collapse: collapse;
+    width: 100%;
+}
+table td,th{
+    padding: 4px;
+}
+
+/* Detalle guia styles */
+.container{
+    box-sizing: border-box;
+    font-size: 15px;
+    color: rgb(90, 90, 90);
+    
+}
+.container b{
+    font-size: 12px;
+}
+.container .grid-container{
+    padding: 4px;
+    display: grid;
+    gap:3px;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(4,1fr);
+    grid-auto-rows: 1fr;
+    height: 60vh;
+}
+.container .grid-container .grid-item{
+    background-color: #fff;
+    padding: 5px;
+}
+
+.container .grid-container .grid-item:nth-child(5){
+    grid-row: 2 / 2;
+    grid-column: 1 / 3;
+}
+.container .grid-container .grid-item:nth-child(6){
+    grid-column: 3 / 5;
+}
+.container .grid-container .grid-item:nth-child(7){
+    grid-column: 1 / 5;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+/* Detalle guia styles end*/
+
+/* Modal styles */
+.modal-background{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(2, 2, 2, 0.637);
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all .3s ease-in-out;
+}
+.modal-container{
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 10px;
+    padding: 5px;
+    width: 35%;
+    height: 30vh;
+    background-color: #fff;
+    transform: scale(.3); 
+    opacity: 0; 
+    transition: all .3s ease;
+}
+.modal-background .modal-container .modal-title{
+    width: 100%;
+    height: 15%;
+}
+.modal-background .modal-container .modal-body{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+.modal-background .modal-container .modal-body input{
+    border:none;
+    margin: 5px 0;
+    border-bottom: 1px solid gray;
+    height: 30px;
+    outline: none;
+}
+.modal-background .modal-container .modal-footer{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.show-modal{
+    opacity: 1;
+    transform: scale(1);
+}
+.show-modal-bg{
+    opacity: 1;
+    z-index: 500;
+}
+.btn{
+    width: 100px;
+    height: 30px;
+    background-color: var(--main-color);
+    color: #fff;
+    border: none;
+    outline: none;
+}
+.btn:hover{
+    background-color: var(--main-color-hover);
+    cursor: pointer;
+}
+.row{
+    width: 110px;
 }

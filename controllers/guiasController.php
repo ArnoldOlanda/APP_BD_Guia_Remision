@@ -12,6 +12,15 @@
             }
             require_once('./views/Guia/motrar_guia.php');
         }
+        public function detalle(){
+            if($_GET){
+                $guia=new Guia_remision();
+                $nroGuia=$_GET['nro'];
+
+                $result=$guia->get_guiaRemisionNroGuia($nroGuia);
+            }
+            require_once('./views/Guia/detalle.php');
+        }
         public function insertar()
         {
             if($_POST){

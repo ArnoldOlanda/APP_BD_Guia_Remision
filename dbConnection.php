@@ -7,7 +7,7 @@
              if(!isset(self::$instancia))
              {
                  $opcionesPDO[PDO::ATTR_ERRMODE]=PDO::ERRMODE_EXCEPTION;
-                 self::$instancia= new PDO('mysql:host=localhost;dbname=bd_guia_remision','root','contrasql',$opcionesPDO);
+                 self::$instancia= new PDO('mysql:host=localhost;dbname=bd_guia_remision','root','admin',$opcionesPDO);
                  //echo "conexion realizada";
              }
              return self::$instancia;

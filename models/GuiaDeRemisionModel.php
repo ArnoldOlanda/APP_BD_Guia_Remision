@@ -20,14 +20,20 @@
 		}
 		public function get_guiaRemisionNroGuia($GuiaNumero)
 		{
-			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[Create procedure Lista_GuiaNroGuia @codigo char(11) as select * from Guia_Remision where Nro_Guia = @codigo]
-			$resultado = $this->db->preparate("EXECUTE Lista_GuiaNroGuia '"+$GuiaNumero+"'");
-			$resultado->execute($resultado,[$GuiaNumero]);
-			while ($row = $resultado->fetch_assoc()) 
+			$data=[];
+			$resultado = $this->db->prepare("call sp_buscar_guia_nro(?)");
+			$resultado->execute([$GuiaNumero]);
+			
+			$Guia_remision[] = $resultado->fetch(PDO::FETCH_ASSOC);	
+			$resultado->nextRowset();
+			while ($row =$resultado->fetch(PDO::FETCH_ASSOC)) 
 			{
-				$Guia_remision[] = $row;
-			}
-			return $Guia_remision;
+				$Cuerpo_guia[] = $row;
+			}	
+			$data[]=$Guia_remision;
+			$data[]=$Cuerpo_guia;
+
+			return $data;
 		}
 		public function get_guiaRemisionNroFactura($FacturaN)
 		{
@@ -83,6 +89,7 @@
 			//}
 			return $this->Guia_remision;
 		}
+
 
 
 	}
