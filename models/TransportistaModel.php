@@ -1,18 +1,29 @@
 <?php
 	class TransportistaModel{
 		
-		private $GuiaRemision;//nombre de base de datos
-		
+		private $db;//nombre de base de datos
 		
 		public function __construct(){
-			$this->GuiaRemision=Conectar::conexion();//conecta con la base de datos
-			
+			$this->db=DB::CrearInstancia();//conecta con la base de datos
 		}
-		public function get_TransportistaModel(){
-			$sql="SELECT * FROM Transportista";
-			$resultado=$this->GuiaRemision->query($sql);
-			
-			return $this->resultado;
+
+		public function get_Lista_Transportista(){
+			$sql = "call Lista_Transportista();";
+			$resultado = $this->db->query($sql);
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)){
+				$ListaTransportista[] = $row;
+			}
+			return $ListaTransportista;
+		}
+
+		public function get_Consulta_Transportista($NumLicencia)
+		{
+			$resultado = $this->db->preparate("call Consulta_TransportistaEspecifico('"+$NumLicencia+"');");
+			$resultado->execute($resultado,[$NumLicencia]);
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) {
+				$Devuelve[] = $row;
+			}
+			return $Devuelve;
 		}
 		
 		

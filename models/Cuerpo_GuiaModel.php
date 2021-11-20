@@ -1,19 +1,32 @@
 <?php
 	class Cuerpo_GuiaModel{
 		
-		private $GuiaRemision;//nombre de base de datos
-		
+		private $db;//nombre de base de datos
 		
 		public function __construct(){
-			$this->GuiaRemision=Conectar::conexion();//conecta con la base de datos
-			
+			$this->db=DB::CrearInstancia();//conecta con la base de datos
 		}
-		public function get_Cuerpo_GuiaModel(){
-			$sql="SELECT * FROM Cuerpo_Guia";
-			$resultado=$this->GuiaRemision->query($sql);
-			
-			return $this->resultado;
+
+		public function get_Lista_Cuerpo_Guia(){
+			$sql = "call Lista_Cuerpo_Guia();";
+			$resultado = $this->db->query($sql);
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)){
+				$ListaCuerpo_Guia[] = $row;
+			}
+			return $ListaCuerpo_Guia;
 		}
+
+		public function get_consulta_Cuerpo_Guia($NumCuerpo_Guia)
+		{
+			$resultado = $this->db->preparate("call Consulta_Cuerpo_Guia('"+$NumCuerpo_Guia+"');");
+			$resultado->execute($resultado,[$NumCuerpo_Guia]);
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
+			{
+				$Devuelve[] = $row;
+			}
+			return $Devuelve;
+		}
+
 		public function registrar(){
 			$ID_Producto =$_POST['ID_Producto'];
 			$Cantidad = $_POST['Cantidad'];

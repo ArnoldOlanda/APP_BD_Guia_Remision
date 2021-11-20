@@ -1,20 +1,32 @@
 <?php
 	class ConducirModel{
 		
-		private $GuiaRemision;//nombre de base de datos
-		//private Cuerpo_Guia
+		private $db;//nombre de base de datos
 		
 		public function __construct(){
-			$this->GuiaRemision=Conectar::conexion();//conecta con la base de datos
-			//$this->Cuerpo_Guia=array();
+			$this->db=DB::CrearInstancia();//conecta con la base de datos
 		}
-		public function get_ConducirModel(){
-			$sql="SELECT * FROM Conducir";
-			$resultado=$this->GuiaRemision->query($sql);
-			
-			return $this->resultado;
+
+		public function get_Lista_Conducir(){
+			$sql = "call Lista_Conducir();";
+			$resultado = $this->db->query($sql);
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
+			{
+				$ListadoConducir[] = $row;
+			}
+			return $ListadoConducir;
 		}
-		
+
+		public function get_Consulta_Conducir_Especifico($NumLicencia)
+		{
+			$resultado = $this->db->preparate("call Consulta_Conducir('"+$NumLicencia+"');");
+			$resultado->execute($resultado,[$NumLicencia]);
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
+			{
+				$Devuelve[] = $row;
+			}
+			return $Devuelve;
+		}
 		
 	}
 ?>

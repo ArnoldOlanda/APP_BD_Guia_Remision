@@ -1,26 +1,19 @@
 <?php
-	class Producto{
+	class ProductoModel{
+		
+		private $db;//nombre de base de datos
 		
 		public function __construct(){
-			$this->db = BD::crearInstancia();
+			$this->db=DB::CrearInstancia();//conecta con la base de datos
 		}
-		public function get_Productos(){
-			$sql="call sp_lista_productos";
-			$resultado=$this->db->query($sql);
-			
-			return $resultado;
-		}
-		public function createProducto($unid,$desc){
-			$resultado=$this->db->prepare("call sp_insert_producto(?,?)");
-			$resultado->execute([$unid,$desc]);
 
-		}
-		public function updateProducto($id,$unid,$desc){
-			$resultado=$this->db->prepare("call sp_update_producto(?,?,?)");
-			$resultado->execute([$unid,$desc,$id]);
-
-		}
-		
-		
+		public function get_Lista_Productos(){
+			$sql = "call Lista_Producto();";
+			$resultado = $this->db->query($sql);
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)){
+				$ListaProductos[] = $row;
+			}
+			return $ListaProductos;
+		}		
 	}
 ?>
