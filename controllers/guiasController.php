@@ -12,6 +12,25 @@
             }
             require_once('./views/Guia/motrar_guia.php');
         }
+        public function listarBoleta()
+        {
+            $data=[];
+            if($_GET){
+                $guia=new Guia_remision();
+                $data=$guia->get_guiaRemisionBoleta();
+            }
+            require_once('./views/Guia/GuiaBoleta.php');
+        }
+        public function listarFactura()
+        {
+            $data=[];
+            if($_GET){
+                $guia=new Guia_remision();
+                $data=$guia->get_guiaRemisionFactura();
+            }
+            require_once('./views/Guia/GuiaFactura.php');
+        }
+
         public function detalle(){
             if($_GET){
                 $guia=new Guia_remision();

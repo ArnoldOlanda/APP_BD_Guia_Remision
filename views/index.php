@@ -88,12 +88,11 @@
 											<i class="arrow"></i>
 						                </a>
 						                <ul class="collapse">
-						                    <li><a href="./?ctrl=guias&acc=listar">Cliente Natural</a></li>
-											<li><a href="#">Cliente Juridico</a></li>
-											<li><a href="#">Factura</a></li>
-											<li><a href="#">Boleta</a></li>
-											<li><a href="#">Motivo de traslado</a></li>
-											
+						                    <!-- <li><a href="./?ctrl=guias&acc=listar">Cliente Natural</a></li>
+											<li><a href="#">Cliente Juridico</a></li> -->
+                                            <li><a href="./?ctrl=guias&acc=listar">General</a></li>
+											<li><a href="./?ctrl=guias&acc=listarFactura">Factura</a></li>
+											<li><a href="./?ctrl=guias&acc=listarBoleta">Boleta</a></li>
 						                </ul>
 						            </li>
 

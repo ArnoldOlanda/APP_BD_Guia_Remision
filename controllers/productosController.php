@@ -5,8 +5,8 @@
 	
 		public function listar(){
 			
-			$producto = new Producto();
-			$result = $producto->get_Productos();
+			$producto = new ProductoModel();
+			$result = $producto->get_Lista_Productos();
 			
 			require_once "views/Producto/listarProductos.php";
 		}
@@ -16,7 +16,7 @@
 				$id=$_POST['idProd'];
 				$unidad=$_POST['unidadMedida'];
 				$descripcion=$_POST['descripcion'];
-				$producto = new Producto();
+				$producto = new ProductoModel();
 				//Si esta vacio significa que se quiere ingresar un nuevo registro
 				if($id==""){ 
 					$producto->createProducto($unidad,$descripcion);

@@ -1,10 +1,11 @@
 <?php
     require_once("./models/Cliente_NaturalModel.php");
+    require_once("./models/ClienteJuridicoModel.php");
 
     class ClientesController{
         public function listar_natural(){
          
-			$cliente=new Cliente();
+			$cliente=new Cliente_NaturalModel();
           
             $dataN=$cliente->get_Clientes_naturales();
                 
@@ -12,16 +13,17 @@
         }
         public function listar_juridico(){
          
-			$cliente=new Cliente();
+			$cliente=new Cliente_Juridico();
              
-            $dataJ=$cliente->get_Clientes_juridicos();
+            $dataJ=$cliente->get_ListaCliente_Juridico();
             
             require_once("./views/Cliente/listarClienteJuridico.php");
         }
 
         public function insertar(){
-			$cliente=new Cliente();
+			
             if($_POST['tipoCliente']=='Natural'){
+                $cliente=new Cliente_NaturalModel();
                 $dni= $_POST["dni"];
 				$nombre= $_POST['nombre'];
                 $apellido= $_POST['apellido'];
@@ -33,6 +35,7 @@
             }
 
             if($_POST['tipoCliente']=='Juridico'){
+                $cliente=new Cliente_Juridico();
                $ruc=$_POST['ruc'];
                $codDomicilioFiscal=$_POST['codDomicilioFiscal'];
                $nombreEmpresa=$_POST['nombreEmpresa'];
@@ -42,20 +45,21 @@
             require_once("./views/Clientes/create.php");
         }
         public function buscar(){
-            $cliente=new Cliente();
+            
             if($_GET['tipoCliente']=='Natural'){
-                
-                $result=$cliente->buscar($_GET['dni']);
+                $cliente=new Cliente_NaturalModel();
+                $result=$cliente->get_Cliente_Natural_Epecifico($_GET['dni']);
             }
             if($_GET['tipoCliente']=='Juridico'){
-                $result=$cliente->buscar($_GET['ruc']);
+                $cliente=new Cliente_Juridico();
+                $result=$cliente->get_ListaCliente_JuridicoPorRUC($_GET['ruc']);
             }
 
             require_once("./views/Clientes/buscar.php");
         }
         public function modificar(){
-            $cliente=new Cliente();
             if($_POST['tipoCliente']=='Natural'){
+                $cliente=new Cliente_NaturalModel();
                 $dni= $_POST["dni"];
 				$nombre= $_POST['nombre'];
                 $apellido= $_POST['apellido'];
@@ -67,6 +71,7 @@
             }
 
             if($_POST['tipoCliente']=='Juridico'){
+                $cliente=new Cliente_Juridico();
                $ruc=$_POST['ruc'];
                $codDomicilioFiscal=$_POST['codDomicilioFiscal'];
                $nombreEmpresa=$_POST['nombreEmpresa'];
