@@ -18,7 +18,7 @@
 	
         <?php foreach ($result[0] as $data) {
             echo "<a href='./?ctrl=guias&acc=listar'>Volver</a>";
-            echo "<h3>Guia Nro: ".$data['Nro_Guia']."</h3>";
+            echo "<h3>guia Nro: ".$data['Nro_Guia']."</h3>";
             echo "<div class='grid-container-g'>";
             echo "<div class='grid-item-g'><b>Fecha de emision:</b><br>" . $data['Fecha emision'] . "</div>";
             echo "<div class='grid-item-g'><b>Fecha de traslado:</b><br>" . $data['Fecha traslado'] . "</div>";

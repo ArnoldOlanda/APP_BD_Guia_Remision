@@ -26,7 +26,7 @@
                 <!--Brand logo & name-->
                 <div class="navbar-header">
                     <a href="./?ctrl=paginas&acc=inicio" class="navbar-brand">
-                        <img src="img\logo.png" alt="Nifty Logo" class="brand-icon">
+                        <!-- <img src="img\logo.png" alt="Nifty Logo" class="brand-icon"> -->
                         <div class="brand-title">
                             <span class="brand-text">GDI</span>
                         </div>
@@ -116,16 +116,16 @@
 						            </li>
 
 									<li>
-						                <a href="BuscarVehiculos.html">
+						                <a href="./?ctrl=vehiculos&acc=listar">
 						                    <i class="demo-pli-map-2"></i>
 						                    <span class="menu-title">Vehiculos</span>
 						                </a>
 						            </li>
 
 									<li>
-						                <a href="BuscarConductores.html">
+						                <a href="./?ctrl=conductores&acc=listar">
 						                    <i class="demo-pli-add-user"></i>
-						                    <span class="menu-title">conductores</span>
+						                    <span class="menu-title">Conductores</span>
 						                </a>
 						            </li>
 						            <li class="list-divider"></li>

@@ -16,15 +16,15 @@
 			}
 			return $ListaProductos;
 		}
-		// public function createProducto($unid,$desc){
-		// 	$resultado=$this->db->prepare("call sp_insert_producto(?,?)");
-		// 	$resultado->execute([$unid,$desc]);
+		public function createProducto($unid,$desc){
+			$resultado=$this->db->prepare("call sp_insertar_producto(?,?)");
+			$resultado->execute([$unid,$desc]);
 
-		// }
-		// public function updateProducto($id,$unid,$desc){
-		// 	$resultado=$this->db->prepare("call sp_update_producto(?,?,?)");
-		// 	$resultado->execute([$unid,$desc,$id]);
+		}
+		public function updateProducto($id,$unid,$desc){
+			$resultado=$this->db->prepare("call sp_actualizar_producto(?,?,?)");
+			$resultado->execute([$unid,$desc,$id]);
 
-		// }		
+		}		
 	}
 ?>

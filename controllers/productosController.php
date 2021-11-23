@@ -13,20 +13,16 @@
 		
 		public function createOrModify(){
 			if($_POST){
-				$id=$_POST['idProd'];
+				$clave=$_POST['clave'];
 				$unidad=$_POST['unidadMedida'];
 				$descripcion=$_POST['descripcion'];
 				$producto = new ProductoModel();
 				//Si esta vacio significa que se quiere ingresar un nuevo registro
-				if($id==""){ 
-					$producto->createProducto($unidad,$descripcion);
-				}else{
-					$producto->updateProducto($id,$unidad,$descripcion);
-				}
+				if($clave=="crear") $producto->createProducto($unidad,$descripcion);
+				else $producto->updateProducto($clave,$unidad,$descripcion);
+
 				header('Location:./?ctrl=productos&acc=listar');
 			}
-			
-			
 		}
 		
 		public function delete($id){
@@ -40,14 +36,7 @@
 			
 			//$producto = new Producto();
 			//$data = $producto-> consultar($id);
-			
 			require_once "views/Producto/delete.php";
-		}
-		public function modify($producto){
-			
-			//$producto-> ($id);
-			require_once "views/Producto/modify.php";
-		}
-	
+		}	
 	}
 ?>

@@ -1,4 +1,4 @@
--- Para los nombres del los procedimientos usar la siguiente forma   sp_nombre_del_procedimiento  todo en minusculas.
+﻿-- Para los nombres del los procedimientos usar la siguiente forma   sp_nombre_del_procedimiento  todo en minusculas.
 
 --Guias (Guia o cuerpo de guia)
 delimiter //
@@ -127,8 +127,27 @@ begin
 end//
 
 --Conductores--------------------------------------------------------------------------------------
-
+delimiter //
+create procedure sp_lista_conductores()
+begin
+	select * from transportista;
+end//
 --Vehiculos-----------------------------------------------------------------------------------------
+delimiter //
+create procedure sp_lista_vehiculos()
+begin
+	select * from vehiculo;
+end//
+
+delimiter //
+create procedure sp_actualizar_vehiculo(in placa,in new_placa varchar(7),in marca varchar(12),in nro_constancia char(10))
+begin
+	update vehiculo set
+	placa=new_placa,
+	marca=marca,
+	nro_constancia_inscripcion=nro_constancia
+	where placa=placa
+end//
 
 --Facturas------------------------------------------------------------------------------------------
 create procedure sp_lista_factura()

@@ -15,13 +15,13 @@
     <div class="pad-all text-center">
         <table width="100%">
             <thead>
-                <tr>	
-					<th>Nro Guia</th>
-                    <th>Boleta</th>
-                    <th>Fecha emision</th>
-                    <th>Cliente</th>
-                    <th>Punto partida</th>
-                    <th>Punto llegada</th>
+                <tr>
+                    <th style="text-align: center">Nro Guia</th>
+                    <th style="text-align: center">Boleta</th>
+                    <th style="text-align: center">Fecha emision</th>
+                    <th style="text-align: center">Cliente</th>
+                    <th style="text-align: center">Punto partida</th>
+                    <th style="text-align: center">Punto llegada</th>
 
                 </tr>
             </thead>
