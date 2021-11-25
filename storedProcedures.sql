@@ -362,21 +362,6 @@ create procedure sp_lista_conductores()
 begin
 	select * from transportista;
 end//
-
-delimiter //
-create procedure sp_insertar_transportista(in nroLicencia char(9),in dnit char(8),in ape varchar(20),in nom varchar(20),in tel char(9))
-begin
-	insert into transportista values(nroLicencia,dnit,ape,nom,tel);
-end//
-
-delimiter //
-create procedure sp_actualizar_transportista(in nroLicencia char(9),in dnit char(8),in ape varchar(20),in nom varchar(20),in tel char(9))
-begin
-	update transportista set
-	dni=dnit, apellidos=ape, nombres=nom, telefono=tel
-	where licencia_conducir=nroLicencia;
-end//
-
 --Vehiculos-----------------------------------------------------------------------------------------
 delimiter //
 create procedure sp_lista_vehiculos()

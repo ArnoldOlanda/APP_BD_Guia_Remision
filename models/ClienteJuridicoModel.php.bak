@@ -29,16 +29,16 @@
 			return $devuCliJuri;
 		}
 		
-		public function createCliente_Juridico($unid,$desc){
+		public function createProducto($unid,$desc){
 			$resultado=$this->db->prepare("call sp_insertar_producto(?,?)");
 			$resultado->execute([$unid,$desc]);
 
 		}
-		public function updateCliente_Juridico($id,$unid,$desc){
+		public function updateProducto($id,$unid,$desc){
 			$resultado=$this->db->prepare("call sp_actualizar_producto(?,?,?)");
 			$resultado->execute([$unid,$desc,$id]);
 		}
-		public function deleteCliente_Juridico($id){
+		public function deleteProducto($id){
 			$resultado=$this->db->prepare("call sp_eliminar_producto(?)");
 			$resultado->execute([$id]);
 		}

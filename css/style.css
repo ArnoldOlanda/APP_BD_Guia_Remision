@@ -3,21 +3,10 @@ table{
     border-collapse: collapse;
     width: 100%;
 }
-table th{
-    text-align: center;
-}
 table td,th{
     padding: 4px;
 }
-#table-productos th:last-child{
-    width: 20%;
-}
 
-table .row{
-    display:flex;
-    gap: 5px;
-    justify-content: center;
-}
 /* Detalle guia styles */
 .container-g{
     box-sizing: border-box;
@@ -78,7 +67,7 @@ table .row{
     border-radius: 10px;
     padding: 5px;
     width: 35%;
-    height: 45vh;
+    height: 35vh;
     background-color: #fff;
     transform: scale(.3); 
     opacity: 0; 
@@ -120,7 +109,7 @@ table .row{
 .btn{
     width: 100px;
     height: 30px;
-    background-color: #25476a;
+    background-color: blue;
     color: #fff;
     border: none;
     outline: none;
@@ -130,5 +119,5 @@ table .row{
     cursor: pointer;
 }
 .row{
-    width: 150px;
+    width: 110px;
 }

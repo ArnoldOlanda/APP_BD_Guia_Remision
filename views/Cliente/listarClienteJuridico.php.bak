@@ -40,6 +40,6 @@
 
 </div>
 <div class="modal-background">
-    <input type="hidden" id="modalPara" value="juridico">
+    <input type="hidden" id="modalPara" value="natural">
 	
 </div>

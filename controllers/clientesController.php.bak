@@ -104,7 +104,7 @@
                $nombreEmpresa=$_POST['nombreEmpresa'];
                 //Set all data of post method to object of model
                 $cliente->modificar_Clientes_juridico($ruc,$codDomicilioFiscal,$nombreEmpresa);
-            }
+            }|
             require_once("./views/Clientes/modificar.php");
         }
         public function delete(){
