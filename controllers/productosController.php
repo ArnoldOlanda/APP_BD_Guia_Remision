@@ -25,11 +25,13 @@
 			}
 		}
 		
-		public function delete($id){
-			
-			//$producto = new Producto();
-			//$producto-> eliminar($id);
-			require_once "views/Producto/delete.php";
+		public function delete(){
+			if($_GET){
+				$clave=$_GET['clave'];
+				$producto = new ProductoModel();
+				$producto->deleteProducto($clave);
+				header('Location:./?ctrl=productos&acc=listar');
+			}
 		}
 		
 		public function consultar($id){

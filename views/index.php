@@ -82,7 +82,7 @@
 						            </li>
 									
 						            <li>
-						                <a href="./?ctrl=guias&acc=listar">
+						                <a href="">
 						                    <i class="demo-pli-file-html"></i>
 						                    <span class="menu-title">Consultar Guias</span>
 											<i class="arrow"></i>

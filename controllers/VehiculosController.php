@@ -29,11 +29,15 @@
 		}
 	}
 	
-	public function delete($id){
+	public function delete(){
+		if($_GET){
+			$clave=$_GET['clave'];
+			$vehiculo = new VehiculoModel();
+			$vehiculo-> deleteVehiculo($clave);
+
+			header('Location:./?ctrl=vehiculos&acc=listar');
+		}
 		
-		// $vehiculo = new VehiculoModel();
-		// $vehiculo-> eliminar($id);
-		// require_once "views/Vehiculo/delete.php";
 	}
 	
 

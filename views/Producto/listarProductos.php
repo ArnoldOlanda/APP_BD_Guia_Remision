@@ -28,7 +28,7 @@
                 echo "<td>" . $dato["Unidad_Medida"] . "</td>";
                 echo "<td>" . $dato["Descripcion"] . "</td>";
                 echo "<td class='row'><button class='btn btnUpdateOpenModal'>Modificar</button>";
-                //echo "<a href='./?ctrl=productos&acc=eliminar&id=" . $dato["Id_Producto"] . "'>Eliminar</a>";
+                echo "<button class='btn btnDeleteRow'>Eliminar</button>";
                 echo "<input type=hidden value='" . $dato['Id_Producto'] . "_" . $dato['Unidad_Medida'] . "_" . $dato['Descripcion'] . "'></td>";
                 echo "</tr>";
             }
@@ -40,18 +40,4 @@
 </div>
 <div class="modal-background">
     <input type="hidden" id="modalPara" value="productos">
-		<!-- <form action="./?ctrl=productos&acc=createOrModify" method="post" class="modal-container">
-			<div class="modal-title">
-				<h3 id="titleModal">Nuevo producto</h3>
-			</div>
-			<div class="modal-body">
-				<input type="text" name="unidadMedida" id="unidadMedida" placeholder="unidad de medida" autocomplete="off">
-				<input type="text" name="descripcion" id="descripcion" placeholder="descripcion" autocomplete="off">
-				<input type="hidden" name="idProd" id="idProd" value="">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn" id="btnCloseModal">Cancelar</button>
-				<button type="submit" class="btn" id="btnSubmitData">Registrar</button>
-			</div>
-		</form> -->
 </div>

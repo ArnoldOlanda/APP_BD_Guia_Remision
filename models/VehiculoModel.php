@@ -34,6 +34,9 @@ include_once("dbConnection.php");
 			$resultado = $this->db->prepare("call sp_actualizar_vehiculo(?,?,?)");
 			$resultado->execute([$placa,$marca,$constancia]);
 		}
-		
+		public function deleteVehiculo($placa){
+			$resultado = $this->db->prepare("call sp_eliminar_vehiculo(?)");
+			$resultado->execute([$placa]);
+		}
 	}
 ?>

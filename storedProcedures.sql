@@ -47,6 +47,7 @@ begin
 	left join cliente_juridico j on g.RUC=j.RUC;
 end //
 
+delimiter //
 create procedure sp_lista_guia_remision_factura()
 begin
     SELECT g.Nro_Guia ,
@@ -59,8 +60,69 @@ begin
 	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
 	left join cliente_juridico j on g.RUC=j.RUC
     Where g.Nro_Factura is not null;
-end
+end//
 
+delimiter //
+create procedure sp_lista_guia_remision_factura_filtro_nro_factura(in nro char(12))
+begin
+    SELECT g.Nro_Guia ,
+	g.Nro_Factura 'numero_factura', 
+	concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision',
+	j.nombre_empresa 'Cliente juridico',
+	d1.direccion 'Punto partida',d2.direccion 'Punto llegada'
+	FROM guia_remision g  
+	left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo
+	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
+	left join cliente_juridico j on g.RUC=j.RUC
+    Where g.Nro_Factura=nro;
+end//
+
+delimiter //
+create procedure sp_lista_guia_remision_factura_filtro_fecha(in mes char(2),in anio char(4))
+begin
+    SELECT g.Nro_Guia ,
+	g.Nro_Factura 'numero_factura', 
+	concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision',
+	j.nombre_empresa 'Cliente juridico',
+	d1.direccion 'Punto partida',d2.direccion 'Punto llegada'
+	FROM guia_remision g  
+	left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo
+	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
+	left join cliente_juridico j on g.RUC=j.RUC
+    Where g.FE_Mes=mes and g.FE_Año=anio;
+end//
+
+delimiter //
+create procedure sp_lista_guia_remision_factura_filtro_cliente(in rucj char(11))
+begin
+    SELECT g.Nro_Guia ,
+	g.Nro_Factura 'numero_factura', 
+	concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision',
+	j.nombre_empresa 'Cliente juridico',
+	d1.direccion 'Punto partida',d2.direccion 'Punto llegada'
+	FROM guia_remision g  
+	left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo
+	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
+	left join cliente_juridico j on g.RUC=j.RUC
+    Where g.RUC=rucj;
+end//
+
+delimiter //
+create procedure sp_lista_guia_remision_factura_filtro_fecha_cliente(in mes char(2),in anio char(4),in rucj char(11))
+begin
+    SELECT g.Nro_Guia ,
+	g.Nro_Factura 'numero_factura', 
+	concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision',
+	j.nombre_empresa 'Cliente juridico',
+	d1.direccion 'Punto partida',d2.direccion 'Punto llegada'
+	FROM guia_remision g  
+	left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo
+	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
+	left join cliente_juridico j on g.RUC=j.RUC
+    Where g.FE_Mes=mes and g.FE_Año=anio and g.RUC=rucj;
+end//
+
+delimiter //
 create procedure sp_lista_guia_remision_boleta()
 begin
 	SELECT g.Nro_Guia ,
@@ -73,9 +135,171 @@ begin
 	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
 	left join cliente_natural c on g.Dni_Cliente=c.DNI
 	Where g.Nro_Boleta is not null;
-end
+end//
 
---Clientes (Juridico o natural)
+delimiter //
+create procedure sp_lista_guia_remision_boleta_filtro_nro_boleta(in nro char(12))
+begin
+	SELECT g.Nro_Guia ,
+	g.Nro_Boleta as "Numero de Boleta", 
+	concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision',
+	concat_ws(' ',c.nombres,c.apellidos) 'Cliente natural',
+	d1.direccion 'Punto partida',d2.direccion 'Punto llegada'
+	FROM guia_remision g  
+	left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo
+	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
+	left join cliente_natural c on g.Dni_Cliente=c.DNI
+	Where g.Nro_Boleta=nro;
+end//
+
+delimiter //
+create procedure sp_lista_guia_remision_boleta_filtro_fecha(in mes char(2),in anio char(4))
+begin
+	SELECT g.Nro_Guia ,
+	g.Nro_Boleta as "Numero de Boleta", 
+	concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision',
+	concat_ws(' ',c.nombres,c.apellidos) 'Cliente natural',
+	d1.direccion 'Punto partida',d2.direccion 'Punto llegada'
+	FROM guia_remision g  
+	left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo
+	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
+	left join cliente_natural c on g.Dni_Cliente=c.DNI
+	Where g.FE_Mes=mes and g.FE_Año=anio;
+end//
+
+delimiter //
+create procedure sp_lista_guia_remision_boleta_filtro_cliente(in dni char(8))
+begin
+	SELECT g.Nro_Guia ,
+	g.Nro_Boleta as "Numero de Boleta", 
+	concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision',
+	concat_ws(' ',c.nombres,c.apellidos) 'Cliente natural',
+	d1.direccion 'Punto partida',d2.direccion 'Punto llegada'
+	FROM guia_remision g  
+	left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo
+	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
+	left join cliente_natural c on g.Dni_Cliente=c.DNI
+	Where g.Dni_Cliente=dni;
+end//
+
+delimiter //
+create procedure sp_lista_guia_remision_boleta_filtro_fecha_cliente(in mes char(2), in anio char(4),in dni char(8))
+begin
+	SELECT g.Nro_Guia ,
+	g.Nro_Boleta as "Numero de Boleta", 
+	concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'Fecha emision',
+	concat_ws(' ',c.nombres,c.apellidos) 'Cliente natural',
+	d1.direccion 'Punto partida',d2.direccion 'Punto llegada'
+	FROM guia_remision g  
+	left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo
+	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
+	left join cliente_natural c on g.Dni_Cliente=c.DNI
+	Where g.FE_Mes=mes and g.FE_Año=anio and g.Dni_Cliente=dni;
+end//
+
+delimiter //
+Create procedure sp_lista_guia_remision_filtro_nro_guia(in numero char(11))
+begin
+	SELECT g.Nro_Guia ,
+	g.Nro_Boleta as "numero_boleta",g.Nro_Factura 'numero_factura', 
+	concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'fecha_emision',
+	concat_ws(' ',c.nombres,c.apellidos) 'cliente_natural',
+	j.nombre_empresa 'cliente_juridico',
+	d1.direccion 'punto_partida',d2.direccion 'punto_llegada'
+	FROM guia_remision g  
+	left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo
+	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
+	left join cliente_natural c on g.Dni_Cliente=c.DNI
+	left join cliente_juridico j on g.RUC=j.RUC
+    where g.Nro_Guia=numero;
+end //
+
+delimiter //
+Create procedure sp_lista_guia_remision_filtro_fecha(in mes char(2),in anio char(4))
+begin
+	SELECT g.Nro_Guia ,
+	g.Nro_Boleta as "numero_boleta",g.Nro_Factura 'numero_factura', 
+	concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'fecha_emision',
+	concat_ws(' ',c.nombres,c.apellidos) 'cliente_natural',
+	j.nombre_empresa 'cliente_juridico',
+	d1.direccion 'punto_partida',d2.direccion 'punto_llegada'
+	FROM guia_remision g  
+	left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo
+	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
+	left join cliente_natural c on g.Dni_Cliente=c.DNI
+	left join cliente_juridico j on g.RUC=j.RUC
+    where g.FE_Mes=mes and g.FE_Año=anio;
+end //
+
+delimiter //
+Create procedure sp_lista_guia_remision_filtro_cliente_natural(in dni char(8))
+begin
+	SELECT g.Nro_Guia ,
+	g.Nro_Boleta as "numero_boleta",g.Nro_Factura 'numero_factura', 
+	concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'fecha_emision',
+	concat_ws(' ',c.nombres,c.apellidos) 'cliente_natural',
+	j.nombre_empresa 'cliente_juridico',
+	d1.direccion 'punto_partida',d2.direccion 'punto_llegada'
+	FROM guia_remision g  
+	left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo
+	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
+	left join cliente_natural c on g.Dni_Cliente=c.DNI
+	left join cliente_juridico j on g.RUC=j.RUC
+    where g.Dni_Cliente=dni;
+end //
+
+delimiter //
+Create procedure sp_lista_guia_remision_filtro_cliente_juridico(in rucj char(11))
+begin
+	SELECT g.Nro_Guia ,
+	g.Nro_Boleta as "numero_boleta",g.Nro_Factura 'numero_factura', 
+	concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'fecha_emision',
+	concat_ws(' ',c.nombres,c.apellidos) 'cliente_natural',
+	j.nombre_empresa 'cliente_juridico',
+	d1.direccion 'punto_partida',d2.direccion 'punto_llegada'
+	FROM guia_remision g  
+	left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo
+	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
+	left join cliente_natural c on g.Dni_Cliente=c.DNI
+	left join cliente_juridico j on g.RUC=j.RUC
+    where g.RUC=rucj;
+end //
+
+delimiter //
+Create procedure sp_lista_guia_remision_filtro_fecha_cliente_natural(in mes char(2),in anio char(4),in dni char(8))
+begin
+	SELECT g.Nro_Guia ,
+	g.Nro_Boleta as "numero_boleta",g.Nro_Factura 'numero_factura', 
+	concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'fecha_emision',
+	concat_ws(' ',c.nombres,c.apellidos) 'cliente_natural',
+	j.nombre_empresa 'cliente_juridico',
+	d1.direccion 'punto_partida',d2.direccion 'punto_llegada'
+	FROM guia_remision g  
+	left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo
+	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
+	left join cliente_natural c on g.Dni_Cliente=c.DNI
+	left join cliente_juridico j on g.RUC=j.RUC
+    where g.FE_Mes=mes and g.FE_Año=anio and g.Dni_Cliente=dni;
+end //
+
+delimiter //
+Create procedure sp_lista_guia_remision_filtro_fecha_cliente_juridico(in mes char(2),in anio char(4),in rucj char(11))
+begin
+	SELECT g.Nro_Guia ,
+	g.Nro_Boleta as "numero_boleta",g.Nro_Factura 'numero_factura', 
+	concat_ws( '-',g.FE_Dia,g.FE_Mes,g.FE_Año) as 'fecha_emision',
+	concat_ws(' ',c.nombres,c.apellidos) 'cliente_natural',
+	j.nombre_empresa 'cliente_juridico',
+	d1.direccion 'punto_partida',d2.direccion 'punto_llegada'
+	FROM guia_remision g  
+	left join Direcciones d1 on g.Cod_Punto_Partida=d1.codigo
+	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
+	left join cliente_natural c on g.Dni_Cliente=c.DNI
+	left join cliente_juridico j on g.RUC=j.RUC
+    where g.FE_Mes=mes and g.FE_Año=anio and g.RUC=rucj;
+end //
+
+-- Clientes (Juridico o natural)----------------------------------------------------------------
 delimiter //
 create procedure sp_lista_cliente_juridico()
 begin
@@ -126,6 +350,12 @@ begin
 	update producto set unidad_medida=unid,descripcion=descrip where id_producto=idProd;
 end//
 
+delimiter //
+create procedure sp_eliminar_producto(in idProd int)
+BEGIN
+	delete from producto where id_producto=idProd;
+END//
+
 --Conductores--------------------------------------------------------------------------------------
 delimiter //
 create procedure sp_lista_conductores()
@@ -140,14 +370,26 @@ begin
 end//
 
 delimiter //
-create procedure sp_actualizar_vehiculo(in placa,in new_placa varchar(7),in marca varchar(12),in nro_constancia char(10))
+create procedure sp_insertar_vehiculo(in n_placa varchar(7),in n_marca varchar(12),in nro_constancia char(10))
+begin
+	insert into vehiculo (placa,marca,nro_constancia_inscripcion)
+	values(n_placa,n_marca,nro_constancia);
+end//
+
+delimiter //
+create procedure sp_actualizar_vehiculo(in n_placa varchar(7),in marca varchar(12),in nro_constancia char(10))
 begin
 	update vehiculo set
-	placa=new_placa,
 	marca=marca,
 	nro_constancia_inscripcion=nro_constancia
-	where placa=placa
-end//
+	where placa=n_placa;
+end
+
+delimiter //
+create procedure sp_eliminar_vehiculo(in n_placa varchar(7))
+BEGIN
+	delete from vehiculo where placa=n_placa;
+END//
 
 --Facturas------------------------------------------------------------------------------------------
 create procedure sp_lista_factura()

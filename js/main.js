@@ -126,6 +126,19 @@ rowData.forEach(element => {
         btnSubmitData.innerText="Modificar";
         llenarFormulario(modalName,element)
     })
+
+    element.childNodes[1].addEventListener('click',()=>{
+        let deleteKey = element.childNodes[2].value.split('_')
+        if(confirm("¿Estas seguro que deseas eliminar el registro?")){
+            if(modalName=='productos'){
+                window.location.href = `./?ctrl=productos&acc=delete&clave=${deleteKey[0]}`;
+            }else if(modalName=='vehiculos'){
+                window.location.href = `./?ctrl=vehiculos&acc=delete&clave=${deleteKey[0]}`;
+            }
+            
+            //console.log(deleteKey[0])
+        }
+    })
     
 });
 
@@ -144,7 +157,7 @@ closeModal.addEventListener('click',()=>{
 })
 
 const llenarFormulario=(nombreFormulario,e)=>{
-    let data=e.childNodes[1].value.split("_")
+    let data=e.childNodes[2].value.split("_")
     if(nombreFormulario=='productos'){
         campoClave.value=data[0]
         inputUnidadMedida.value=data[1]

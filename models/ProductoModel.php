@@ -24,7 +24,10 @@
 		public function updateProducto($id,$unid,$desc){
 			$resultado=$this->db->prepare("call sp_actualizar_producto(?,?,?)");
 			$resultado->execute([$unid,$desc,$id]);
-
+		}
+		public function deleteProducto($id){
+			$resultado=$this->db->prepare("call sp_eliminar_producto(?)");
+			$resultado->execute([$id]);
 		}		
 	}
 ?>
