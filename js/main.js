@@ -85,6 +85,53 @@ const crearFormulario=(modal)=>{
         modalBody.appendChild(placa)
         modalBody.appendChild(marca)
         modalBody.appendChild(constanciaInsc)
+
+    }else if(modal=='conductores'){
+
+        form.setAttribute('action','./?ctrl=conductores&acc=createOrModify')
+        title.innerText="Nuevo Conductor"
+        const nroLicencia=document.createElement('INPUT')
+        const dni=document.createElement('INPUT')
+        const apellidos=document.createElement('INPUT')
+        const nombres=document.createElement('INPUT')
+        const telefono=document.createElement('INPUT')
+
+        nroLicencia.setAttribute('type','text')
+        nroLicencia.setAttribute('name','nroLicencia')
+        nroLicencia.setAttribute('id','nroLicencia')
+        nroLicencia.setAttribute('placeholder','Numero de licencia de conducir')
+        nroLicencia.setAttribute('autocomplete','off')
+
+        dni.setAttribute('type','text')
+        dni.setAttribute('name','dni')
+        dni.setAttribute('id','dni')
+        dni.setAttribute('placeholder','Numero de DNI')
+        dni.setAttribute('autocomplete','off')
+
+        apellidos.setAttribute('type','text')
+        apellidos.setAttribute('name','apellidos')
+        apellidos.setAttribute('id','apellidos')
+        apellidos.setAttribute('placeholder','Apellidos')
+        apellidos.setAttribute('autocomplete','off')
+
+        nombres.setAttribute('type','text')
+        nombres.setAttribute('name','nombres')
+        nombres.setAttribute('id','nombres')
+        nombres.setAttribute('placeholder','Nombres')
+        nombres.setAttribute('autocomplete','off')
+
+        telefono.setAttribute('type','text')
+        telefono.setAttribute('name','telefono')
+        telefono.setAttribute('id','telefono')
+        telefono.setAttribute('placeholder','Numero de telefono')
+        telefono.setAttribute('autocomplete','off')
+
+        modalBody.appendChild(clave)
+        modalBody.appendChild(nroLicencia)
+        modalBody.appendChild(dni)
+        modalBody.appendChild(apellidos)
+        modalBody.appendChild(nombres)
+        modalBody.appendChild(telefono)
     }
     modalTitle.appendChild(title)
     modalFooter.appendChild(btnCancelar)
@@ -116,7 +163,12 @@ const inputDescripcion=document.getElementById('descripcion');
 const inputPlaca=document.getElementById('placa')
 const inputMarca=document.getElementById('marca')
 const inputConstanciaInscripcion=document.getElementById('constanciaInscripcion')
-
+//Inputs del formulario conductor
+const inputNroLicencia=document.getElementById('nroLicencia')
+const inputDni=document.getElementById('dni')
+const inputApellidos=document.getElementById('apellidos')
+const inputNombres=document.getElementById('nombres')
+const inputTelefono=document.getElementById('telefono')
 
 rowData.forEach(element => {
     element.childNodes[0].addEventListener('click',()=>{
@@ -134,6 +186,8 @@ rowData.forEach(element => {
                 window.location.href = `./?ctrl=productos&acc=delete&clave=${deleteKey[0]}`;
             }else if(modalName=='vehiculos'){
                 window.location.href = `./?ctrl=vehiculos&acc=delete&clave=${deleteKey[0]}`;
+            }else if(modalName=='conductores'){
+                window.location.href = `./?ctrl=conductores&acc=delete&clave=${deleteKey[0]}`;
             }
             
             //console.log(deleteKey[0])
@@ -157,7 +211,7 @@ closeModal.addEventListener('click',()=>{
 })
 
 const llenarFormulario=(nombreFormulario,e)=>{
-    let data=e.childNodes[2].value.split("_")
+    let data=e.lastChild.value.split("_")
     if(nombreFormulario=='productos'){
         campoClave.value=data[0]
         inputUnidadMedida.value=data[1]
@@ -167,12 +221,30 @@ const llenarFormulario=(nombreFormulario,e)=>{
         inputPlaca.value=data[0]
         inputMarca.value=data[1]
         inputConstanciaInscripcion.value=data[2]
+    }else if(nombreFormulario=='conductores'){
+        campoClave.value=data[0]
+        inputNroLicencia.value=data[0]
+        inputDni.value=data[1]
+        inputApellidos.value=data[2]
+        inputNombres.value=data[3]
+        inputTelefono.value=data[4]
     }
 }
 const limpiarInputs=()=>{
-    inputUnidadMedida.value=""
-    inputDescripcion.value=""
-    inputMarca.value=""
-    inputPlaca.value=""
-    inputConstanciaInscripcion.value=""
+    if(modalName=='productos'){
+        inputUnidadMedida.value=""
+        inputDescripcion.value=""
+    }else if(modalName=='vehiculos'){
+        inputMarca.value=""
+        inputPlaca.value=""
+        inputConstanciaInscripcion.value=""
+    }else if(modalName=='conductores'){
+        inputNroLicencia.value=''
+        inputDni.value=''
+        inputApellidos.value=''
+        inputNombres.value=''
+        inputTelefono.value=''
+    }
+    
+
 }
