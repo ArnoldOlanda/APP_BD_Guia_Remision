@@ -29,18 +29,14 @@
 			return $devuCliJuri;
 		}
 		
-		public function createCliente_Juridico($unid,$desc){
-			$resultado=$this->db->prepare("call sp_insertar_producto(?,?)");
-			$resultado->execute([$unid,$desc]);
-
-		}
-		public function updateCliente_Juridico($id,$unid,$desc){
-			$resultado=$this->db->prepare("call sp_actualizar_producto(?,?,?)");
-			$resultado->execute([$unid,$desc,$id]);
-		}
-		public function deleteCliente_Juridico($id){
-			$resultado=$this->db->prepare("call sp_eliminar_producto(?)");
-			$resultado->execute([$id]);
+		public function crear_Clientes_juridico(){
+			$sql="call sp_insertar_cliente_juridico(?,?,?)";
+			$resultado=$this->db->query($sql);
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
+			{
+				$devu[] = $row;
+			}
+			return $devu;
 		}
 
 	}
