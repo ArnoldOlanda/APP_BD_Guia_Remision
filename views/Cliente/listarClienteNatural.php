@@ -1,4 +1,4 @@
-﻿
+﻿ <link rel="stylesheet" href="css/table.css">
     <div id="page-head">
         <div class="pad-all text-center">
             <h3 style="font-size:30px">Consultar Clientes Naturales</h3>
@@ -8,7 +8,7 @@
     
     <!--Page content-->
     <div id="page-content">
-
+</br>
         <div class="pad-all text-center">
             <table width="100%">
                 <thead>
@@ -27,6 +27,9 @@
                         echo "<td>" . $daton["nombre"] . "</td>";
                         echo "<td>" . $daton["direccion"] . "</td>";
                         echo "<td>" . $daton["telefono"] . "</td>";
+						echo "<td class='row'><button class='btn btnUpdateOpenModal'>Modificar</button>";
+						echo "<button class='btn btnDeleteRow'>Eliminar</button>";
+						echo "<input type=hidden value='" . $daton['dni'] . "_" . $daton['nombre'] . "_" . $daton['direccion'] ."_" . $daton['telefono'] ."'></td>";
                         echo "</tr>";
                     }
 
@@ -34,8 +37,12 @@
 
                 </tbody>
             </table>
-            </p1>
+           <button id="btnOpenModal" class="btn">Nuevo</button>
         </div>
 
     </div>
+<div class="modal-background">
+    <input type="hidden" id="modalPara" value="natural">
+		
+</div>
 

@@ -1,6 +1,6 @@
 ﻿-- Para los nombres del los procedimientos usar la siguiente forma   sp_nombre_del_procedimiento  todo en minusculas.
 
---Guias (Guia o cuerpo de guia)
+-- Guias (Guia o cuerpo de guia)
 delimiter //
 Create procedure sp_buscar_guia_nro (in nro char(11)) 
 begin 
@@ -308,12 +308,13 @@ begin
     on c.cod_domicilio_fiscal=d.codigo;
 end//
 
+delimiter //
 create procedure sp_buscar_cliente_juridico_ruc(IN RUCJ char(11))
 begin
     select j.RUC,j.Nombre_Empresa, d.Direccion from Cliente_Juridico j 
     inner join Direcciones d on j.Cod_Domicilio_Fiscal = d.codigo
     where j.RUC = RUCJ;
-end
+end//
 
 delimiter //
 create procedure sp_lista_cliente_natural()
@@ -398,7 +399,7 @@ begin
 	marca=marca,
 	nro_constancia_inscripcion=nro_constancia
 	where placa=n_placa;
-end
+end//
 
 delimiter //
 create procedure sp_eliminar_vehiculo(in n_placa varchar(7))
@@ -407,65 +408,75 @@ BEGIN
 END//
 
 --Facturas------------------------------------------------------------------------------------------
+delimiter //
 create procedure sp_lista_factura()
 begin
     select f.Nro_Factura, concat_ws( '-',f.Dia,f.Mes,f.Año) as 'Fecha', f.RUC, j.Nombre_Empresa from factura f
     inner join Cliente_Juridico j on f.RUC = j.RUC;
-end
+end//
 
+delimiter //
 create procedure sp_busca_factura_numero(IN NumeroF char(12))
 begin
     select f.Nro_Factura, concat_ws( '-',f.Dia,f.Mes,f.Año) as 'Fecha', f.RUC, j.Nombre_Empresa from factura f
     inner join Cliente_Juridico j on f.RUC = j.RUC
     where f.Nro_Factura = NumeroF;
-end
+end//
 
 --Direcciones---------------------------------------------------------------------------------------
+delimiter //
 create procedure sp_lista_direcciones()
 begin
     select * from Direcciones;
-end
+end//
 
+delimiter //
 create procedure sp_buscar_direccion_codigo(IN CodigoDire int)
 begin
     select * from Direcciones
     where Codigo = CodigoDire;
-end
+end//
 
 --Empresa transportista--------------------------------------------------------------------------------
+delimiter //
 create procedure sp_lista_empresa_transportista()
 begin
     select * from Empresa_Transportista;
-end
+end//
 
+delimiter //
 create procedure sp_busca_empresa_transportista_ruc(IN RUCT char(11))
 begin
     select * from empresa_transportista
     where RUC = RUCT;
-end
+end//
 
+delimiter //
 create procedure sp_lista_direccion_cliente_juridico()
 begin
     select dj.ruc,d.direccion from direcciones_cliente_juridico dj
     inner join direcciones d on dj.cod_direccion=d.codigo;
-end
+end//
 
+delimiter //
 create procedure sp_lista_direccion_cliente_juridico_ruc(in rucj char(11))
 begin
     select dj.ruc,d.direccion from direcciones_cliente_juridico dj
     inner join direcciones d on dj.cod_direccion=d.codigo where dj.ruc=rucj;
-end
+end//
 
 --Tipo de comprobante--------------------------------------------------------------
+delimiter //
 create procedure sp_lista_tipo_comprobante()
 begin
     select * from tipo_comprobante;
-end
+end//
 --Tipo de traslado-----------------------------------------------------------------
+delimiter //
 create procedure Lista_MotivoTraslado()
 begin
 	select * from motivo_traslado;
-end
+end//
 
 
 

@@ -19,6 +19,33 @@
             
             require_once("./views/Cliente/listarClienteJuridico.php");
         }
+		public function createOrModifyJuridico(){
+			if($_POST){
+				$clave=$_POST['clave'];
+				$unidad=$_POST['unidadMedida'];
+				$descripcion=$_POST['descripcion'];
+				$cliente = new Cliente_Juridico();
+				//Si esta vacio significa que se quiere ingresar un nuevo registro
+				if($clave=="crear") $cliente->createCliente_Juridico($unidad,$descripcion);
+				else $cliente->updateCliente_Juridico($clave,$unidad,$descripcion);
+
+				header('Location:./?ctrl=clientes&acc=listar_juridico');
+			}
+		}
+		public function createOrModifyNatural(){
+			if($_POST){
+				$clave=$_POST['clave'];
+				$unidad=$_POST['unidadMedida'];
+				$descripcion=$_POST['descripcion'];
+				$cliente = new Cliente_NaturalModel();
+				//Si esta vacio significa que se quiere ingresar un nuevo registro
+				if($clave=="crear") $cliente->crear_Clientes_juridico($unidad,$descripcion);
+				else $cliente->updateProducto($clave,$unidad,$descripcion);
+
+				header('Location:./?ctrl=clientes&acc=listar_natural');
+			}
+		}
+		
 
         public function insertar(){
 			
@@ -80,7 +107,7 @@
             }
             require_once("./views/Clientes/modificar.php");
         }
-        public function eliminar(){
+        public function delete(){
             $cliente=new Cliente();
             if($_GET['tipoCliente']=='Natural'){
                 $cliente->eliminar($_GET['dni']);

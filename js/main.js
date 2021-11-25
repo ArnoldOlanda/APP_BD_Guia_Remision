@@ -132,7 +132,74 @@ const crearFormulario=(modal)=>{
         modalBody.appendChild(apellidos)
         modalBody.appendChild(nombres)
         modalBody.appendChild(telefono)
+    }else if(modal=='natural'){
+        form.setAttribute('action','./?ctrl=clientes&acc=createOrModifyNatural')
+        title.innerText="Nuevo vehiculo"
+        const dni=document.createElement('INPUT')
+        const nombre=document.createElement('INPUT')
+        const direccion=document.createElement('INPUT')
+		const telefono=document.createElement('INPUT')
+
+        dni.setAttribute('type','text')
+        dni.setAttribute('name','placa')
+        dni.setAttribute('id','placa')
+        dni.setAttribute('placeholder','Numero de DNI')
+        dni.setAttribute('autocomplete','off')
+
+        nombre.setAttribute('type','text')
+        nombre.setAttribute('name','marca')
+        nombre.setAttribute('id','marca')
+        nombre.setAttribute('placeholder','Nombre')
+        nombre.setAttribute('autocomplete','off')
+
+        direccion.setAttribute('type','text')
+        direccion.setAttribute('name','constanciaInscripcion')
+        direccion.setAttribute('id','constanciaInscripcion')
+        direccion.setAttribute('placeholder','Direccion')
+        direccion.setAttribute('autocomplete','off')
+        
+		telefono.setAttribute('type','text')
+        telefono.setAttribute('name','constanciaInscripcion')
+        telefono.setAttribute('id','constanciaInscripcion')
+        telefono.setAttribute('placeholder','Numero de telefono')
+        telefono.setAttribute('autocomplete','off')
+		
+        modalBody.appendChild(clave)
+        modalBody.appendChild(dni)
+        modalBody.appendChild(nombre)
+        modalBody.appendChild(direccion)
+		modalBody.appendChild(telefono)
+    }else if(modal=='juridico'){
+        form.setAttribute('action','./?ctrl=vehiculos&acc=createOrModify')
+        title.innerText="Nuevo vehiculo"
+        const ruc=document.createElement('INPUT')
+        const nombre_empresa=document.createElement('INPUT')
+        const direccion=document.createElement('INPUT')
+
+        ruc.setAttribute('type','text')
+        ruc.setAttribute('name','ruc')
+        ruc.setAttribute('id','ruc')
+        ruc.setAttribute('placeholder','Numero de ruc')
+        ruc.setAttribute('autocomplete','off')
+
+        nombre_empresa.setAttribute('type','text')
+        nombre_empresa.setAttribute('name','nombre_empresa')
+        nombre_empresa.setAttribute('id','nombre_empresa')
+        nombre_empresa.setAttribute('placeholder','Nombre')
+        nombre_empresa.setAttribute('autocomplete','off')
+
+        direccion.setAttribute('type','text')
+        direccion.setAttribute('name','direccion')
+        direccion.setAttribute('id','direccion')
+        direccion.setAttribute('placeholder','Direccion')
+        direccion.setAttribute('autocomplete','off')
+        
+        modalBody.appendChild(clave)
+        modalBody.appendChild(ruc)
+        modalBody.appendChild(nombre_empresa)
+        modalBody.appendChild(direccion)
     }
+	
     modalTitle.appendChild(title)
     modalFooter.appendChild(btnCancelar)
     modalFooter.appendChild(btnOk)
