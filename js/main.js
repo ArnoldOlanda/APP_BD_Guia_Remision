@@ -525,7 +525,7 @@ if (formIngresoGuia) {
     element.childNodes[0].addEventListener("click", () => {
       modalBackground.classList.add("show-modal-bg");
       modalContainer.classList.add("show-modal");
-      titleModal.innerText = "Modificar producto";
+      titleModal.innerText = "Modificar";
       btnSubmitData.innerText = "Modificar";
       llenarFormulario(modalName, element);
     });
@@ -553,7 +553,7 @@ if (formIngresoGuia) {
   openModal.addEventListener("click", () => {
     modalBackground.classList.add("show-modal-bg");
     modalContainer.classList.add("show-modal");
-    limpiarInputs();
+    limpiarInputs(modalName);
   });
 
   closeModal.addEventListener("click", () => {
@@ -601,31 +601,31 @@ if (formIngresoGuia) {
       inputDireccion_juridico.value = data[2];
     }
   };
-  const limpiarInputs = () => {
-    if (modalName == "productos") {
+  const limpiarInputs = (name) => {
+    if (name == "productos") {
       inputUnidadMedida.value = "";
       inputDescripcion.value = "";
-    } else if (modalName == "vehiculos") {
+    } else if (name == "vehiculos") {
       inputMarca.value = "";
       inputPlaca.value = "";
       inputConstanciaInscripcion.value = "";
-    } else if (modalName == "conductores") {
+    } else if (name == "conductores") {
       inputNroLicencia.value = "";
       inputDni.value = "";
       inputApellidos.value = "";
       inputNombres.value = "";
       inputTelefono.value = "";
-    } else if (modalName == "natural") {
+    } else if (name == "natural") {
       inputDni_natural.value = "";
       inputApellidos_natural.value = "";
       inputNombres_natural.value = "";
       inputDireccion.value = "";
       inputTelefono_natural.value = "";
-    } else if (modalName == "juridico") {
+    } else if (name == "juridico") {
       inputRuc_juridico.value = "";
       inputNombre_empresa.value = "";
       inputDireccionFis_juridico.value = "";
-    } else if (modalName == "detalleJuridico") {
+    } else if (name == "detalleJuridico") {
       inputDireccion_juridico.value = "";
     }
   };

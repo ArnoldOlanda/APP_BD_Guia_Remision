@@ -355,9 +355,8 @@ end//
 delimiter //
 create procedure sp_lista_direccion_cliente_juridico_ruc(in rucj char(11))
 begin
-	select dj.Cod_Direccion,d.direccion from direcciones_cliente_juridico dj
-    inner join direcciones d on dj.Cod_Direccion=d.Codigo
-    where dj.ruc=rucj;
+    select dj.ruc, d.codigo, d.direccion from direcciones_cliente_juridico dj
+    inner join direcciones d on dj.cod_direccion=d.codigo where dj.ruc=rucj;
 end//
 
 delimiter //
@@ -632,6 +631,5 @@ create procedure sp_lista_motivo_traslado()
 begin
 	select * from motivo_traslado;
 end//
-
 
 
