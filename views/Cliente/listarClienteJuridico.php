@@ -15,14 +15,15 @@
                 <tr>
                     <th>Ruc</th>
                     <th>Nombre</th>
-                    <th>Direccion</th>
+                    <th>Direccion Domicilio fiscal</th>
 
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($dataJ as $datoj) {
                     echo "<tr>";
-                    echo "<td>" . $datoj["ruc"] . "</td>";
+					echo "<td><b><a href='./?ctrl=clientes&acc=detalle&nro=".$datoj['ruc']."'>".$datoj["ruc"]."</a></b></td>";
+                  
                     echo "<td>" . $datoj["nombre_empresa"] . "</td>";
                     echo "<td>" . $datoj["direccion"] . "</td>";
 					echo "<td class='row'><button class='btn btnUpdateOpenModal'>Modificar</button>";

@@ -134,44 +134,52 @@ const crearFormulario=(modal)=>{
         modalBody.appendChild(telefono)
     }else if(modal=='natural'){
         form.setAttribute('action','./?ctrl=clientes&acc=createOrModifyNatural')
-        title.innerText="Nuevo vehiculo"
+        title.innerText="Nuevo Cliente Natural"
         const dni=document.createElement('INPUT')
         const nombre=document.createElement('INPUT')
+		const apellidos=document.createElement('INPUT')
         const direccion=document.createElement('INPUT')
 		const telefono=document.createElement('INPUT')
 
         dni.setAttribute('type','text')
-        dni.setAttribute('name','placa')
-        dni.setAttribute('id','placa')
+        dni.setAttribute('name','dni_natural')
+        dni.setAttribute('id','dni_natural')
         dni.setAttribute('placeholder','Numero de DNI')
         dni.setAttribute('autocomplete','off')
 
         nombre.setAttribute('type','text')
-        nombre.setAttribute('name','marca')
-        nombre.setAttribute('id','marca')
-        nombre.setAttribute('placeholder','Nombre')
+        nombre.setAttribute('name','nombres_natural')
+        nombre.setAttribute('id','nombres_natural')
+        nombre.setAttribute('placeholder','Nombres')
         nombre.setAttribute('autocomplete','off')
+		
+		apellidos.setAttribute('type','text')
+        apellidos.setAttribute('name','apellidos_natural')
+        apellidos.setAttribute('id','apellidos_natural')
+        apellidos.setAttribute('placeholder','Apellidos')
+        apellidos.setAttribute('autocomplete','off')
 
         direccion.setAttribute('type','text')
-        direccion.setAttribute('name','constanciaInscripcion')
-        direccion.setAttribute('id','constanciaInscripcion')
+        direccion.setAttribute('name','direccion_natural')
+        direccion.setAttribute('id','direccion_natural')
         direccion.setAttribute('placeholder','Direccion')
         direccion.setAttribute('autocomplete','off')
         
 		telefono.setAttribute('type','text')
-        telefono.setAttribute('name','constanciaInscripcion')
-        telefono.setAttribute('id','constanciaInscripcion')
+        telefono.setAttribute('name','telefono_natural')
+        telefono.setAttribute('id','telefono_natural')
         telefono.setAttribute('placeholder','Numero de telefono')
         telefono.setAttribute('autocomplete','off')
 		
         modalBody.appendChild(clave)
         modalBody.appendChild(dni)
         modalBody.appendChild(nombre)
+		modalBody.appendChild(apellidos)
         modalBody.appendChild(direccion)
 		modalBody.appendChild(telefono)
     }else if(modal=='juridico'){
-        form.setAttribute('action','./?ctrl=vehiculos&acc=createOrModify')
-        title.innerText="Nuevo vehiculo"
+        form.setAttribute('action','./?ctrl=clientes&acc=createOrModifyJuridico')
+        title.innerText="Nuevo Cliente Juridico"
         const ruc=document.createElement('INPUT')
         const nombre_empresa=document.createElement('INPUT')
         const direccion=document.createElement('INPUT')
@@ -191,12 +199,45 @@ const crearFormulario=(modal)=>{
         direccion.setAttribute('type','text')
         direccion.setAttribute('name','direccion')
         direccion.setAttribute('id','direccion')
-        direccion.setAttribute('placeholder','Direccion')
+        direccion.setAttribute('placeholder','Direccion Domicilio fiscal')
         direccion.setAttribute('autocomplete','off')
         
         modalBody.appendChild(clave)
         modalBody.appendChild(ruc)
         modalBody.appendChild(nombre_empresa)
+        modalBody.appendChild(direccion)
+
+    }else if(modal=='detalleJuridico'){
+		const ruc_doc= document.getElementById('ruc_cli').innerText
+        form.setAttribute('action','./?ctrl=clientes&acc=createOrModifyDireccion')
+        title.innerText="Nueva Direccion"
+		const ruc_direc=document.createElement('INPUT')
+        const cod_direc=document.createElement('INPUT')
+        const direccion=document.createElement('INPUT')
+		
+		ruc_direc.setAttribute('type','hidden')
+        ruc_direc.setAttribute('name','ruc_direccion')
+        ruc_direc.setAttribute('id','ruc_direccion')
+        ruc_direc.setAttribute('placeholder','Numero de ruc')
+        ruc_direc.setAttribute('autocomplete','off')
+		ruc_direc.setAttribute('value',ruc_doc)
+		console.log(ruc_doc)
+		
+		cod_direc.setAttribute('type','hidden')
+        cod_direc.setAttribute('name','cod_direc')
+        cod_direc.setAttribute('id','cod_direc')
+        cod_direc.setAttribute('placeholder','cod_direc')
+        cod_direc.setAttribute('autocomplete','off')
+		
+        direccion.setAttribute('type','text')
+        direccion.setAttribute('name','direccion_detalle')
+        direccion.setAttribute('id','direccion_detalle')
+        direccion.setAttribute('placeholder','Direccion')
+        direccion.setAttribute('autocomplete','off')
+        
+        modalBody.appendChild(clave)
+		modalBody.appendChild(ruc_direc)
+		modalBody.appendChild(cod_direc)
         modalBody.appendChild(direccion)
     }
 	
@@ -211,8 +252,8 @@ const crearFormulario=(modal)=>{
     modalBackground.appendChild(fragment)
 
 }
-crearFormulario(modalName)
 
+crearFormulario(modalName)
 
 const openModal=document.getElementById('btnOpenModal');
 const closeModal=document.getElementById('btnCloseModal');
@@ -236,28 +277,52 @@ const inputDni=document.getElementById('dni')
 const inputApellidos=document.getElementById('apellidos')
 const inputNombres=document.getElementById('nombres')
 const inputTelefono=document.getElementById('telefono')
+//Inputs del formulario cliente_natural
+const inputDni_natural=document.getElementById('dni_natural')
+const inputApellidos_natural=document.getElementById('apellidos_natural')
+const inputNombres_natural=document.getElementById('nombres_natural')
+const inputDireccion=document.getElementById('direccion_natural')
+const inputTelefono_natural=document.getElementById('telefono_natural')
+
+//Inputs del formulario cliente_juridico
+const inputRuc_juridico=document.getElementById('ruc')
+const inputNombre_empresa=document.getElementById('nombre_empresa')
+const inputDireccionFis_juridico=document.getElementById('direccion')
+
+//Inputs del formulario direccion_cliente_juridico
+const inputRUC=document.getElementById('ruc_direccion')
+const inputCod_direc=document.getElementById('cod_direc')
+const inputDireccion_juridico=document.getElementById('direccion_detalle')
+
 
 rowData.forEach(element => {
     element.childNodes[0].addEventListener('click',()=>{
         modalBackground.classList.add('show-modal-bg')
         modalContainer.classList.add('show-modal')
-        titleModal.innerText="Modificar producto";
+        titleModal.innerText="Modificar";
         btnSubmitData.innerText="Modificar";
         llenarFormulario(modalName,element)
     })
 
     element.childNodes[1].addEventListener('click',()=>{
         let deleteKey = element.childNodes[2].value.split('_')
-        if(confirm("¿Estas seguro que deseas eliminar el registro?")){
+		console.log(deleteKey[1])
+        if(confirm("¿Estas seguro que deseas eliminar el registro?, es posible que algunos registros se eliminen")){
             if(modalName=='productos'){
                 window.location.href = `./?ctrl=productos&acc=delete&clave=${deleteKey[0]}`;
             }else if(modalName=='vehiculos'){
                 window.location.href = `./?ctrl=vehiculos&acc=delete&clave=${deleteKey[0]}`;
             }else if(modalName=='conductores'){
                 window.location.href = `./?ctrl=conductores&acc=delete&clave=${deleteKey[0]}`;
+            }else if(modalName=='natural'){
+                window.location.href = `./?ctrl=clientes&acc=deleteNatural&clave=${deleteKey[0]}`;
+            }else if(modalName=='juridico'){
+                window.location.href = `./?ctrl=clientes&acc=deleteJuridico&clave=${deleteKey[0]}`;
+            }else if(modalName=='detalleJuridico'){
+                window.location.href = `./?ctrl=clientes&acc=deleteDetalle&clave=${deleteKey[0]}&cod=${deleteKey[1]}`;
             }
             
-            //console.log(deleteKey[0])
+            
         }
     })
     
@@ -295,6 +360,25 @@ const llenarFormulario=(nombreFormulario,e)=>{
         inputApellidos.value=data[2]
         inputNombres.value=data[3]
         inputTelefono.value=data[4]
+    }else if(nombreFormulario=='natural'){
+        campoClave.value=data[0]
+        inputDni_natural.value=data[0]
+        inputApellidos_natural.value=data[1]
+        inputNombres_natural.value=data[2]
+		inputDireccion.value=data[3]
+        inputTelefono_natural.value=data[4]
+		
+    }else if(nombreFormulario=='juridico'){
+        campoClave.value=data[0]
+        inputRuc_juridico.value=data[0]
+        inputNombre_empresa.value=data[1]
+		inputDireccionFis_juridico.value=data[2]
+		
+    }else if(nombreFormulario=='detalleJuridico'){
+		campoClave.value=data[0]
+        //inputRUC.value=data[0]
+		inputCod_direc.value=data[1]
+		inputDireccion_juridico.value=data[2]
     }
 }
 const limpiarInputs=()=>{
@@ -311,7 +395,23 @@ const limpiarInputs=()=>{
         inputApellidos.value=''
         inputNombres.value=''
         inputTelefono.value=''
+    }else if(modalName=='natural'){
+        
+        inputDni_natural.value=''
+        inputApellidos_natural.value=''
+        inputNombres_natural.value=''
+		inputDireccion.value=''
+        inputTelefono_natural.value=''
+    }else if(modalName=='juridico'){
+        
+        inputRuc_juridico.value=''
+		inputNombre_empresa.value=''
+        inputDireccionFis_juridico.value=''
+    }else if(modalName=='detalleJuridico'){
+        
+       	inputDireccion_juridico.value=''
     }
+	
     
 
 }

@@ -24,7 +24,7 @@
 			echo "<td>" . $dato["Unidad_Medida"] . "</td>";
 			echo "<td>" . $dato["Descripcion"] . "</td>";
 			echo "<td class='row'><button class='btn btnUpdateOpenModal'>Modificar</button>";
-			//echo "<a href='./?ctrl=productos&acc=eliminar&id=" . $dato["Id_Producto"] . "'>Eliminar</a>";
+			echo "<a href='./?ctrl=productos&acc=eliminar&id=" . $dato["Id_Producto"] . "'>Eliminar</a>";
 			echo "<input type=hidden value='".$dato['Id_Producto']."-".$dato['Unidad_Medida']."-".$dato['Descripcion']."'></td>";
 			echo "</tr>";
 		}

@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="css/table.css">
  <div id="page-head">
      <div class="pad-all text-center">
-         <h3 style="font-size:30px">Consultar Vehiculos</h3>
+         <h3 style="font-size:30px">Consultar Conductores</h3>
      </div>
  </div>
  <!--Page content-->
@@ -30,7 +30,7 @@
                         echo "<td>" . $dato["Apellidos"] ." ".$dato['Nombres']. "</td>";
                         echo "<td>" . $dato["Telefono"] ."</td>";
                         echo "<td class='row'><button class='btn btnUpdateOpenModal'>Modificar</button>";
-                        //echo "<button class='btn btnDeleteRow'>Eliminar</button>";
+                        echo "<button class='btn btnDeleteRow'>Eliminar</button>";
                         echo "<input type=hidden value='" . $dato['Licencia_Conducir'] . "_" . 
                             $dato['DNI'] . "_" . $dato['Apellidos'] ."_".$dato['Nombres']."_".$dato['Telefono']. "'></td>";
                         echo "</tr>";

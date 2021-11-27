@@ -26,7 +26,14 @@
 			header('Location:./?ctrl=conductores&acc=listar');
 		}
 	}
-	
+	public function delete(){
+			if($_GET){
+				$clave=$_GET['clave'];
+				$conductor = new TransportistaModel();
+				$conductor->deleteTransportista($clave);
+				header('Location:./?ctrl=conductores&acc=listar');
+			}
+		}
 	
 	}
 ?>

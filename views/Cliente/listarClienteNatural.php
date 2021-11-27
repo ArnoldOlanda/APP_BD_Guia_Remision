@@ -21,15 +21,16 @@
                     </tr>
                 </thead>
                 <tbody>
+					
                     <?php foreach ($dataN as $daton) {
                         echo "<tr>";
                         echo "<td>" . $daton["dni"] . "</td>";
-                        echo "<td>" . $daton["nombre"] . "</td>";
+                        echo "<td>" . $daton["nombres"] . " " . $daton["apellidos"] . "</td>";
                         echo "<td>" . $daton["direccion"] . "</td>";
                         echo "<td>" . $daton["telefono"] . "</td>";
 						echo "<td class='row'><button class='btn btnUpdateOpenModal'>Modificar</button>";
 						echo "<button class='btn btnDeleteRow'>Eliminar</button>";
-						echo "<input type=hidden value='" . $daton['dni'] . "_" . $daton['nombre'] . "_" . $daton['direccion'] ."_" . $daton['telefono'] ."'></td>";
+						echo "<input type=hidden value='" . $daton['dni'] . "_" . $daton['apellidos'] . "_" . $daton['nombres'] . "_" . $daton['direccion'] ."_" . $daton['telefono'] ."'></td>";
                         echo "</tr>";
                     }
 

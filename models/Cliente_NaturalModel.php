@@ -31,7 +31,19 @@
 			}
 			return $devu;
 		}
-		
+		public function createCliente_Natural($dni,$apellidos, $nombres, $telefono){
+			$resultado=$this->db->prepare("call sp_insertar_cliente_natural(?,?,?,?)");
+			$resultado->execute([$dni,$apellidos,$nombres,$telefono]);
+
+		}
+		public function updateCliente_Natural($dni,$apell,$nomb,$telef){
+			$resultado=$this->db->prepare("call sp_actualizar_cliente_natural(?,?,?,?)");
+			$resultado->execute([$dni,$apell,$nomb,$telef]);
+		}
+		public function deleteCliente_Natural($id){
+			$resultado=$this->db->prepare("call sp_eliminar_cliente_natural(?)");
+			$resultado->execute([$id]);
+		}
 			
 	}
 ?>

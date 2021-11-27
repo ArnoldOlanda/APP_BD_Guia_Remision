@@ -245,7 +245,7 @@ begin
 	left join Direcciones d2 on g.Cod_Punto_Llegada=d2.codigo
 	left join cliente_natural c on g.Dni_Cliente=c.DNI
 	left join cliente_juridico j on g.RUC=j.RUC
-    where g.Dni_Cliente=dni;
+   	where g.Dni_Cliente=dni;
 end //
 
 delimiter //
@@ -299,7 +299,10 @@ begin
     where g.FE_Mes=mes and g.FE_Año=anio and g.RUC=rucj;
 end //
 
+
 -- Clientes (Juridico o natural)----------------------------------------------------------------
+
+
 delimiter //
 create procedure sp_lista_cliente_juridico()
 begin
@@ -319,12 +322,13 @@ end//
 delimiter //
 create procedure sp_lista_cliente_natural()
 begin
-	select c.dni,concat_ws(" ",c.apellidos,c.nombres) 'nombre',d.direccion,c.telefono
+	select c.dni, c.apellidos, c.nombres,d.direccion,c.telefono
     from cliente_natural c inner join direcciones d
     on c.cod_direccion=d.codigo;
 end//
 
 delimiter //
+
 create procedure sp_buscar_cliente_natural_dni(in dnic char(8))
 begin
 	select c.dni,concat_ws(" ",c.apellidos,c.nombres) 'nombre',d.direccion,c.telefono
@@ -332,7 +336,57 @@ begin
     on c.cod_direccion=d.codigo
 	where c.dni=dnic;
 end//
+
+delimiter //
+create procedure sp_actualizar_cliente_natural(in dni char(8), in apellidos varchar(20), in nombres varchar(20), in telefono char(9))
+begin
+	
+	update cliente_natural set
+	Apellidos = apellidos,
+	Nombres = nombres,
+	Telefono = telefono	
+	where DNI=dni;
+end//
+
+delimiter //
+create procedure sp_actualizar_cliente_juridico(in ruc_cli char(11),in nombre varchar(50))
+begin
+	update cliente_juridico set
+	Nombre_Empresa = nombre
+	where RUC = ruc_cli ;
+end//
+
+delimiter //
+create procedure sp_insertar_cliente_natural(in dni char(8),in apellidos varchar(20),in nombres varchar(20),in telefono char(9))
+begin
+	set @cod_direc = (select codigo from direcciones order by codigo DESC LIMIT 1);
+	insert into cliente_natural  (DNI, Cod_Direccion, Apellidos, Nombres, Telefono) values (dni, @cod_direc,apellidos, nombres, telefono);
+end//
+
+delimiter //
+create procedure sp_insertar_cliente_juridico(in ruc_cli char(11),in nomb varchar(50))
+begin
+	set @cod_direc = (select codigo from direcciones order by codigo DESC LIMIT 1);
+	insert into cliente_juridico (RUC,Cod_Domicilio_Fiscal, Nombre_Empresa) values (ruc_cli,@cod_direc,nomb);
+end//
+
+
+delimiter //
+create procedure sp_eliminar_cliente_natural(in dni_cli char(8))
+BEGIN
+	delete from cliente_natural where DNI=dni_cli;
+END//
+
+delimiter //
+create procedure sp_eliminar_cliente_juridico(in ruc_cli char(11))
+BEGIN
+	delete from cliente_juridico where RUC= ruc_cli;
+END//
+
 --Productos---------------------------------------------------------------------------------
+
+
+
 delimiter //
 create procedure sp_lista_productos()
 begin
@@ -357,7 +411,12 @@ BEGIN
 	delete from producto where id_producto=idProd;
 END//
 
---Conductores--------------------------------------------------------------------------------------
+
+
+-- Conductores--------------------------------------------------------------------------------------
+
+
+
 delimiter //
 create procedure sp_lista_conductores()
 begin
@@ -378,7 +437,10 @@ begin
 	where licencia_conducir=nroLicencia;
 end//
 
---Vehiculos-----------------------------------------------------------------------------------------
+
+--  Vehiculos-----------------------------------------------------------------------------------------
+
+
 delimiter //
 create procedure sp_lista_vehiculos()
 begin
@@ -407,7 +469,12 @@ BEGIN
 	delete from vehiculo where placa=n_placa;
 END//
 
---Facturas------------------------------------------------------------------------------------------
+
+
+-- Facturas------------------------------------------------------------------------------------------
+
+
+
 delimiter //
 create procedure sp_lista_factura()
 begin
@@ -423,7 +490,11 @@ begin
     where f.Nro_Factura = NumeroF;
 end//
 
---Direcciones---------------------------------------------------------------------------------------
+
+
+-- Direcciones---------------------------------------------------------------------------------------
+ 
+
 delimiter //
 create procedure sp_lista_direcciones()
 begin
@@ -431,13 +502,61 @@ begin
 end//
 
 delimiter //
-create procedure sp_buscar_direccion_codigo(IN CodigoDire int)
+create procedure sp_insertar_direccion(in direccion varchar(120))
 begin
-    select * from Direcciones
-    where Codigo = CodigoDire;
+	insert into direcciones (Direccion)
+	values(direccion);
 end//
 
---Empresa transportista--------------------------------------------------------------------------------
+delimiter //
+create procedure sp_actualizar_direccion(in dni_cli char(8),in direccion_cli varchar(120))
+begin
+	set @cod_direc = (select Cod_Direccion from cliente_natural where DNI=dni_cli);
+	update direcciones set
+	Direccion= direccion_cli
+	where Codigo=cod_direc;
+end//
+
+delimiter //
+create procedure sp_actualizar_direccion_juridico(in cod_direc int,in direccion_cli varchar(120))
+begin
+	update direcciones set
+	Direccion= direccion_cli
+	where Codigo=cod_direc;
+end//
+
+delimiter //
+create procedure sp_relacionar_direccion_juridico(in rucj char(11))
+begin
+	set @cod_direc = (select codigo from direcciones order by codigo DESC LIMIT 1);
+	insert into direcciones_cliente_juridico (RUC, Cod_Direccion)
+	values(rucj,@cod_direc);
+end//
+
+
+
+
+delimiter //
+create procedure sp_lista_direccion_cliente_juridico_ruc(in rucj char(11))
+begin
+    select dj.ruc, d.codigo, d.direccion from direcciones_cliente_juridico dj
+    inner join direcciones d on dj.cod_direccion=d.codigo where dj.ruc=rucj;
+end//
+
+delimiter //
+create procedure sp_eliminar_direccion(in cod int)
+BEGIN
+	delete from direcciones_cliente_juridico where Cod_Direccion=cod;
+	delete from direcciones where Codigo=cod;
+END//
+
+
+
+
+
+-- Empresa transportista--------------------------------------------------------------------------------
+
+
 delimiter //
 create procedure sp_lista_empresa_transportista()
 begin
@@ -459,19 +578,26 @@ begin
 end//
 
 delimiter //
-create procedure sp_lista_direccion_cliente_juridico_ruc(in rucj char(11))
-begin
-    select dj.ruc,d.direccion from direcciones_cliente_juridico dj
-    inner join direcciones d on dj.cod_direccion=d.codigo where dj.ruc=rucj;
-end//
+create procedure sp_eliminar_transportista(in cod char(9))
+BEGIN
+	delete from transportista where Licencia_Conducir=cod;
+END//
+
+
 
 --Tipo de comprobante--------------------------------------------------------------
+
+
 delimiter //
 create procedure sp_lista_tipo_comprobante()
 begin
     select * from tipo_comprobante;
 end//
+
+
 --Tipo de traslado-----------------------------------------------------------------
+
+
 delimiter //
 create procedure Lista_MotivoTraslado()
 begin

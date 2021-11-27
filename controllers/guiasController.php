@@ -18,7 +18,7 @@
                 $dataClienteNatural=$clienteNatural->get_Clientes_Naturales();
                 $dataClienteJuridico=$clienteJuridico->get_ListaCliente_Juridico();
                 foreach ($dataClienteNatural as $value) {
-                    $dataCliente[]=[$value['dni'],$value['nombre']];
+                    $dataCliente[]=[$value['dni'],$value['nombres']];
                 }
                 foreach ($dataClienteJuridico as $value) {
                     $dataCliente[]=[$value['ruc'],$value['nombre_empresa']];
