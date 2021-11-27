@@ -1,0 +1,224 @@
+use BD_Guia_Remision;
+
+INSERT INTO `Direcciones` (`Direccion`)
+VALUES
+('MODULO A MZA. A-02 LOTE 02 SEC. 3 CIUDAD MAJES MAJES CAYLLOMA'),
+('IRRIGACION SAN CAMILO A.S.P 72-LA JOYA-AREQUIPA'),
+('NRO. 153 SAN ISIDRO LA JOYA LA JOYA AREQUIPA AREQUIPA PERU'),
+('ASENT 6 PARCELA 51 NRO C.P SAN CAMILO POR AVENIDA JORGE CHAVES LA JOYA AREQUIPA AREQUIPA PERU'),
+('P.S. CUZCO MZA. H LOTE 4.P.S MI PERU/ ESQ. CON AV.TUPAC AMARU JOSE BUSTAMANTE RIVERO AREQUIPA AREQUIPA PERU'),
+('CAL SOR ANA LOS ANGELES MZ D45 LT 8 A.H.S.R PACHAC-CERRO COLORADO AREQUIPA'),
+('MZA N LOTE JA P.S. EL TRIUNFO SECTOR J ZONA B-LA JOYA-AREQUIPA'),
+('CALLE UNION N°375 A-C.P ACEQUIA ALTA-CAYMA-AREQUIPA-AREQUIPA'),
+('AV. PIZARRO NRO. 104 B DPTO 303 DTR.EDICIVO SANTO DOMINGO(A UNA CUADRA DEL PARQUE LAMBRAMANI) JOSE LUIS'),
+('NRO. -CTRO. SERV.SAN INSIDOR (COSTADO DE LA COMISION DE PAGANTES) LA JOYA AREQUIPA AREQUIPA PERU'),
+('PARCELA 34-CNPO-SAN CAMILO ASENTAMIENTO LA JOYA AREQUIPA QREUIPA PERU'),
+('AV. LA UNION PALLCHOCO 511 SANTIAGO-CUSCO'),
+('PARCELA NOR.C-6 ASENT. 1 AREQUIPA AREQUIPA-LA JOYA'),
+('LAT. 7.1 - RNPO RURAL LA JOYA AREQUIPA AREQUIPA PERU'),
+('MAZ. L LOTE 17 UPIS. 19 DE ENEROCAYMA AREQUIPA AQUIERPA PERU');
+
+INSERT INTO `Cliente_Natural`
+(`DNI`,`Cod_Direccion`,`Apellidos`,`Nombres`,`Telefono`)
+VALUES
+('01265064' ,4 , 'PILCO SARAZA', 'HUMBERTO', '945225845'),
+('40739746' ,12, 'HERRERA CCALA', 'SONIA LOURDES', '941201321'),
+('42713013' ,13, 'VALDIVIA OCHOA ', 'MARIED', '951075258'),
+('43337116' ,14, 'PINTO CHUMBILE', 'MIGUEL ANGEL', '982648521'),
+('41005434' ,15, 'BARRIOS JUAREZ', 'CARLOS MANUEL', '954325085');
+
+INSERT INTO `Boleta`
+(`Nro_Boleta`,`Mes`,`Dia`,`Año`,`Dni_Cliente`)
+VALUES
+('BA01-163','09' ,'21' ,'2021' ,'01265064' ),
+('BA02-163','10' ,'18' ,'2021' ,'40739746' ),
+('BA01-159','08' ,'20' ,'2021' ,'42713013' ),
+('BA01-162','09' ,'03' ,'2021' ,'40739746' ),
+('BA01-158','09' ,'06' ,'2021' ,'43337116' ),
+('BA01-156','09' ,'07' ,'2021' ,'41005434' );
+
+INSERT INTO `Cliente_juridico`
+(`RUC`,`Cod_Domicilio_Fiscal`,`Nombre_Empresa`)
+VALUES
+( '20600263399', 1,'INVERSIONES AGROPECUARIAS SAN CAMILO GMC S.A.C' ),
+( '10403957553', 2,'VARGAS SUEROS RICHARD AVELINO' ),
+( '20602035361', 3,'ASOCIACION AGOLACTEA SAN ISIDRO-AGROLACSI' ),
+( '10405608834', 4,'PRADO COOAGUIL MAIJORIE DAILENE' ),
+( '20601489041', 5,'GRANJA ECOLOGICA EL PARAISO' ),
+( '20559224627', 8,'AGROSUR S Y G S.A.C' ),
+( '20558581876', 9,'ASOCIACION LOS ASES DEL PORONGO' ),
+( '20601607853', 10,'ASOCIACION DE AGROPRODUCTORES VIRGEN DE CHAPI' ),
+( '10418289703', 11,'VALDIVIA APAZA PECY EDMUNDO' );
+
+INSERT INTO `Factura`
+(`Nro_Factura`,`Mes`,`Dia`,`Año`,`RUC`)
+VALUES
+( '0000000012','07','02','2021','20600263399'),
+( '0000000009','06','22','2021','20600263399'),
+( '0000000060','06','19','2021','10403957553'),
+( 'FA01-772','10','20','2021','20602035361'),
+( 'FA01-757','10','16','2021','10405608834'),
+( 'FA01-732','10','06','2021','20601489041'),
+( 'FA01-651','08','31','2021','20558581876'),
+( 'FA01-684','09','15','2021','10405608834'),
+( 'FA01-727','10','05','2021','20601607853'),
+( 'FA01-690','09','17','2021','10418289703'),
+( 'FA01-699','09','20','2021','20602035361'),
+( 'FA01-737','09','10','2021','10405608834'),
+( 'FA01-726','10','05','2021','20601489041');
+
+INSERT INTO `Direcciones_Cliente_Juridico`
+(`RUC`, `Cod_Direccion`)
+VALUES
+( '20600263399','1'),
+( '10403957553','2'),
+( '20602035361','3'),
+( '10405608834','4'),
+( '20601489041','5'),
+( '20559224627','8'),
+( '20558581876','9'),
+( '20601607853','10'),
+( '10418289703','11');
+
+INSERT INTO `Transportista`
+(`Licencia_Conducir`,`DNI`,`Apellidos`,`Nombres`,`Telefono`)
+VALUES
+( 'H80214159', '01453245', 'ARISACA LIMA', 'RUPERTO', '954012471'),
+( '044247167', '01748566', 'VARGAS ROJAS', 'WILBER RUBEN', '941587412'),
+( 'H44030698', '01845623', 'SANCHEZ POMA', 'JOSE', '951568402');
+
+INSERT INTO `Vehiculo`
+(`Placa`,`Marca`,`Nro_Constancia_Inscripcion`)
+VALUES
+( 'VA085', 'ISUZU','60799788'),
+( 'V01942', 'FUSO','41904311'),
+( 'B34880', 'VOLVO','1596826'),
+( 'V42-746', 'DONGFENG','0404231');
+
+INSERT INTO `Producto` (`Unidad_Medida`,`Descripcion`)
+VALUES
+('UNID', 'HARINA DE MAIZ X 50KG(SACO)'),
+('SACO', 'TORTA DE SOYA X 50KG(SACO)'),
+('SACO', 'DERIVADO DE TRIGO ARICELOS 40KG(SACO)'),
+('BOLSA', 'BICARBONATO DE SODIO TURQUIA X 25KG'),
+('BALDE', 'LA LECHERITA(C.P 945)(NEO) BALDE X 18KG'),
+('SACO', 'HARINA INTEGRAL X 55KG(SACO)'),
+('BOLSA', 'TOXIBOND PRO X 25KG'),
+('BOLSA', 'METIONINA (BOLSA X 25KG)'),
+('BOLSA', 'MONTAROS 21 BOLSA X 25KG'),
+('BOLSA', 'ENERGY FEED PREMIX BOLSA X 25KG');
+
+INSERT INTO `Conducir`
+(`Licencia_Conducir`,`Placa`)
+VALUES
+( 'H80214159', 'VA085'),
+( 'H80214159', 'V01942'),
+( '044247167', 'B34880'),
+( 'H44030698', 'V42-746');
+
+INSERT INTO `Transportar`
+(`Placa`,`Id_Producto`)
+VALUES
+( 'VA085', 1),
+( 'V01942', 1),
+( 'B34880', 1),
+( 'V42-746', 1)
+;
+
+
+
+INSERT INTO `Empresa_Transportista`
+(`RUC`,`Nombre_Transportista`)
+VALUES
+('20455776488','INVERSIONES MOLIPESA E.I.R.L'),
+('20559224827','AGROSUR S Y G S.A.C.'),
+('20606187603','INTEGRACION ANDINA MERVIN S.A.C.'),
+('20539537502','AVIAVEHSUP FERRETERIA Y CONSTRUCCIONI S.A.C')
+;
+
+INSERT INTO `Motivo_Traslado` (`Motivo`)
+VALUES
+('VENTA'),
+('VENTA ITINERANTE'),
+('VENTA SUJETA A CONFIRMACION DEL COMPRADOR'),
+('COMPRA'),
+('CONSIGNACION'),
+('DEVOLUCION'),
+('TRASLADO ENTRE ESTABLECIMIENTO DE LA MISMA EMPRESA'),
+('TRSALADO DE BIENES PARA TRANSFORMACION'),
+('RECOJO DE BIENES TRANSFORMADOS'),
+( 'TRSALADO POR EMISOR ITINERANTE DE COMPROBANTES DE PAGO'),
+( 'TRASLADO ZONA PRIMARIA CON ENTREGA A TERCEROS'),
+( 'OTROS')
+;
+
+INSERT INTO `Tipo_Comprobante` (`Tipo`)
+VALUES
+('FACTURA'),
+('BOLETA');
+
+INSERT INTO `Guia_Remision`
+(`Nro_Guia`,`FE_Año`,`FE_Dia`,`FE_Mes`,`FT_Año`,`FT_Dia`,`FT_Mes`,
+`Cod_Punto_Partida`,`Cod_Punto_Llegada`,
+`Nro_Licencia`,`Placa`,`Ruc_Transportista`,`Cod_Tipo_Comprobante`,
+`Cod_Motivo_Traslado`,`Firma_Responsable`,`Firma_Cliente`,
+`Nombre_Conf_Cliente`,`Nro_Factura`,`Nro_Boleta`,`RUC`,
+`Dni_Cliente`)
+VALUES
+('000999', '2021', '02', '07', '2021', '02', '07', 6, 1, 'H80214159', 'VA085', '20455776488', 1, 1, false, false, null, '0000000012', null, '20600263399', null),
+('000994', '2021', '22', '06', '2021', '22', '06', 6, 1, 'H80214159', 'V01942','20559224827', 1, 1, false, false, null, '0000000009', null, '20600263399', null),
+('000993', '2021', '19', '06', '2021', '19', '06', 6, 2, 'H80214159', 'VA085', '20455776488', 1, 1, false, false, null, '0000000060', null, '10403957553', null),
+('002173', '2021', '20', '10', '2021', '20', '10', 7, 3, null, null, null, 1, 1, false, true, null, 'FA01-772', null, '20602035361', null),
+('002172', '2021', '16', '10', '2021', '16', '10', 7, 4, null, null, null, 1, 1, false, true, null, 'FA01-757', null, '10405608834', null),
+('002155', '2021', '20', '09', '2021', '20', '09', 7, 4, null, null, null, 2, 1, false, true, null, null, 'BA01-163', null, '01265064'),
+('002169', '2021', '06', '10', '2021', '06', '10', 7, 5, null, null, null, 1, 1, false, true, null, 'FA01-732', null, '20601489041',null),
+('002161', '2021', '01', '10', '2021', '01', '10', 1, 8, 'H80214159', 'VA085', '20455776488', null, 7, false, false, null, null, null, '20559224627',null),
+('002143', '2021', '31', '08', '2021', '31', '08', 1, 9, null, null, null, 1, 1, false, true, null, 'FA01-651', null, '20558581876',null),
+('002150', '2021', '15', '09', '2021', '15', '09', 7, 4, 'H80214159', 'V01942', '20559224827', 1, 1, false, true, null, 'FA01-684', null, '10405608834',null),
+('002166', '2021', '05', '10', '2021', '05', '10', 7, 10, null, null, null, 1, 1, false, true, null, 'FA01-727', null, '20601607853',null),
+('002152', '2021', '17', '09', '2021', '17', '09', 7, 11, 'H80214159', 'VA085', '20559224827', 1, 1, false, true, null, 'FA01-690', null, '10418289703',null),
+('002157', '2021', '20', '09', '2021', '20', '09', 7, 3, null, null, null, 1, 1, false, true, null, 'FA01-699', null, '20602035361',null),
+('002170', '2021', '09', '10', '2021', '09', '10', 7, 4, null, null, null, 1, 1, false, true, null, 'FA01-737', null, '10405608834',null),
+('002165', '2021', '10', '05', '2021', '10', '05', 7, 5, null, null, null, 1, 1, false, true, null, 'FA01-726', null, '20601489041',null),
+('006575', '2021', '10', '18', '2021', '10', '18', 7, 12, '044247167', 'B34880', '20606187603', 2, 1, false, false, null, null, 'BA02-163', null,'40739746'),
+('002141', '2021', '08', '20', '2021', '08', '20', 7, 13, null, null, null, 2, 1, false, false, null, null, 'BA01-159', null,'42713013'),
+('002144', '2021', '09', '03', '2021', '09', '03', 7, 12, '044247167', 'B34880', '20606187603', 2, 1, false, true, null, null, 'BA01-162', null,'40739746'),
+('002146', '2021', '09', '06', '2021', '09', '06', 6, 14, null, null, null, 2, 1, false, false, null, null, 'BA01-158', null,'43337116'),
+('002148', '2021', '09', '07', '2021', '09', '07', 7, 15, 'H44030698', 'V42-746', '20539537502', 2, 1, false, true, null, null, 'BA01-156', null,'41005434')
+;
+
+INSERT INTO `Cuerpo_Guia`
+(`Nro_Guia`,`Id_Producto`,`Cantidad`,`Peso`)
+VALUES
+( '000999', 1, 20,3500),
+( '000994', 1, 140,7000),
+( '000993', 1, 100,5000),
+( '002173', 2, 80,4000),
+( '002173', 3, 13,520),
+( '002172', 3,70,2800),
+( '002172', 2,32,1600),
+( '002172', 4,5,125),
+( '002172', 5,3,54),
+( '002155', 6,18,900),
+( '002169', 3,38,1520),
+( '002161', 1,80,4000),
+( '002143', 3,147,5880),
+( '002150', 4,1,25),
+( '002150', 7,1,25),
+( '002150', 5,1,10),
+( '002166', 2,18,900),
+( '002152', 1,37,1850),
+( '002157', 3,100,4000),
+( '002157', 8,5,125),
+( '002157', 9,5,125),
+( '002157', 10,5,125),
+( '002170', 2,68,3400),
+( '002165', 2,14,700),
+( '006575', 1, 138,6900),
+( '002141', 3, 61,2440),
+( '002144', 1, 31,1550),
+( '002146', 3, 100,4000),
+( '002146', 2, 36,1800),
+( '002148', 1, 60,3000);
+
+

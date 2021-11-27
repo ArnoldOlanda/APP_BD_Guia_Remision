@@ -620,13 +620,6 @@ begin
     inner join direcciones d on dj.cod_direccion=d.codigo;
 end//
 
-delimiter //
-create procedure sp_lista_direccion_cliente_juridico_ruc(in rucj char(11))
-begin
-    select dj.ruc,d.direccion from direcciones_cliente_juridico dj
-    inner join direcciones d on dj.cod_direccion=d.codigo where dj.ruc=rucj;
-end//
-
 --Tipo de comprobante--------------------------------------------------------------
 delimiter //
 create procedure sp_lista_tipo_comprobante()
