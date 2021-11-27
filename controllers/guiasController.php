@@ -138,8 +138,7 @@
                 $motivoTraslado=$_POST['motivoTraslado'];
                 $firmaResponsable=$_POST['firmaResponsable'];
                 $firmaCliente=$_POST['firmaCliente'];
-                if($_POST['nombreConfCliente']=="") $nombreConfCliente=0;
-                else $nombreConfCliente=1;
+                $nombreConfCliente=$_POST['nombreConfCLiente'];
                 
                 $guia=new Guia_remision();
                 $guia->ingresarGuia($nroGuia,$fe_anio,$fe_dia,$fe_mes,$ft_anio,$ft_dia,$ft_mes,$puntoPartida,$puntoLlegada,$licenciaConducir,

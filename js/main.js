@@ -18,6 +18,7 @@ if (formIngresoGuia) {
   const inputRucTransportista = document.getElementById("rucTransportista");
 
   const tipoComprobante = document.getElementById("tipoComprobante");
+  const tipoComprobanteTexto=document.getElementById("tipoComprobanteTexto");
   const nroComprobante = document.getElementById("nroComprobante");
   const errorMessageTipoComprobante = document.getElementById(
     "errorMessageTipoComprobante"
@@ -75,10 +76,13 @@ if (formIngresoGuia) {
         .length < 9
     ) {
       console.log("entre al if");
-      tipoComprobante.value = tipoComprobante.options[1].value;
+      tipoComprobante.value = 2;
+      tipoComprobanteTexto.value = 'BOLETA'
     } else {
       console.log("entre al else");
-      tipoComprobante.value = tipoComprobante.options[0].value;
+      //tipoComprobante.value = tipoComprobante.options[0].value;
+      tipoComprobante.value = 1;
+      tipoComprobanteTexto.value = 'FACTURA'
     }
   });
 

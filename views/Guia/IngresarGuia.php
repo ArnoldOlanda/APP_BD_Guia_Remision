@@ -14,7 +14,7 @@
             </div>
             <div class="grid-item">
                 <h4>GUIA DE REMISION-REMITENTE</h4>
-                <label for="nroGuia">Numero Guia<br><input type="text" id="nroGuia" name="nroGuia" autocomplete="off"></label>
+                <label for="nroGuia">Numero Guia<br><input type="text" id="nroGuia" name="nroGuia" autocomplete="off" required></label>
                 <span id="errorMessageNroGuia" style="color:red;"></span>
             </div>
             <div class="grid-item">
@@ -126,16 +126,18 @@
                 <label for="rucTransportista">RUC Transportista<br><input type="text" id="rucTransportista" readonly></label>
 
                 <label for="tipoComprobante">Tipo Comprobante<br>
-                    <select id="tipoComprobante" name="tipoComprobante">
+                    <!-- <select id="tipoComprobante" name="tipoComprobante"> -->
                         <!-- <option value="" disabled selected>Seleccione un tipo de comprobante</option> -->
                         <?php 
-                            foreach ($mainData[6] as $value) {
-                                echo "<option value='".$value['Codigo']."'>".$value['Tipo']."</option>";
-                            }
+                            //foreach ($mainData[6] as $value) {
+                              //  echo "<option value='".$value['Codigo']."'>".$value['Tipo']."</option>";
+                            //}
                         ?>
-                    </select>
+                    <!-- </select> -->
+                    <input type="text" id="tipoComprobanteTexto" readonly>
+                    <input type="hidden" id="tipoComprobante" name="tipoComprobante">
                 </label>
-                <label for="nroComprobante">Numero Comprobante<br><input type="text" id="nroComprobante" name="nroComprobante" autocomplete="off"></label>
+                <label for="nroComprobante">Numero Comprobante<br><input type="text" id="nroComprobante" name="nroComprobante" autocomplete="off" require></label>
                 <span style="color:red;" id="errorMessageTipoComprobante"></span>
                 <!-- <label for="nroFactura">Numero Factura<input type="text" id="nroFactura"></label>
                 <label for="nroBoleta">Numero Boleta<input type="text" id="nroBoleta"></label> -->
@@ -143,7 +145,7 @@
             <div class="grid-item">
                 <label for="motivoTraslado">Motivo Traslado<br>
                     <select id="motivoTraslado" name="motivoTraslado">
-                        <option value="" disabled selected>Seleccion un motivo</option>
+                        <option value="" disabled selected>Seleccione un motivo</option>
                         <?php 
                             foreach ($mainData[7] as $value) {
                                 echo "<option value='".$value['Codigo']."'>".$value['Motivo']."</option>";
