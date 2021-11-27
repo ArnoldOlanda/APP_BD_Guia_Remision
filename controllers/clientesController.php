@@ -2,7 +2,7 @@
     require_once("./models/Cliente_NaturalModel.php");
     require_once("./models/ClienteJuridicoModel.php");
     require_once("./models/DireccionClienteJuridicoModel.php");
-
+	require_once("./models/DireccionesModel.php");	
     class ClientesController{
         public function listar_natural(){
          
@@ -30,75 +30,113 @@
             // }
         }
 
-        public function insertar(){
-			
-            if($_POST['tipoCliente']=='Natural'){
-                $cliente=new Cliente_NaturalModel();
-                $dni= $_POST["dni"];
-				$nombre= $_POST['nombre'];
-                $apellido= $_POST['apellido'];
-				$direccion= $_POST['direccion'];
-				$telefono= $_POST['telefono'];
+        
+		public function createOrModifyJuridico(){
+			if($_POST){
+				$clave=$_POST['clave'];
+				$ruc=$_POST['ruc'];
+				$nombre_empresa=$_POST['nombre_empresa'];
+				$direccion=$_POST['direccion'];
+				$cliente = new Cliente_Juridico();
+				$direccion2 = new DireccionesModel();
+				//Si esta vacio significa que se quiere ingresar un nuevo registro
+				if($clave=="crear"){ 
+					$direccion2->createDireccion($direccion);
+					
+					$cliente->createCliente_Juridico($ruc,$nombre_empresa);
+					$direccion2->relacionarDireccion_juridico($ruc);
+				}
+				else{ 
 				
-                //Set all data of post method to object of model
-                $cliente->crear_Clientes_natural($dni,$nombre,$apellido,$direccion,$telefono);
-            }
-
-            if($_POST['tipoCliente']=='Juridico'){
-                $cliente=new Cliente_Juridico();
-               $ruc=$_POST['ruc'];
-               $codDomicilioFiscal=$_POST['codDomicilioFiscal'];
-               $nombreEmpresa=$_POST['nombreEmpresa'];
-                //Set all data of post method to object of model
-                $cliente->crear_Clientes_juridico($ruc,$codDomicilioFiscal,$nombreEmpresa);
-            }
-            require_once("./views/Clientes/create.php");
-        }
-        public function buscar(){
-            
-            if($_GET['tipoCliente']=='Natural'){
-                $cliente=new Cliente_NaturalModel();
-                $result=$cliente->get_Cliente_Natural_Epecifico($_GET['dni']);
-            }
-            if($_GET['tipoCliente']=='Juridico'){
-                $cliente=new Cliente_Juridico();
-                $result=$cliente->get_ListaCliente_JuridicoPorRUC($_GET['ruc']);
-            }
-
-            require_once("./views/Clientes/buscar.php");
-        }
-        public function modificar(){
-            if($_POST['tipoCliente']=='Natural'){
-                $cliente=new Cliente_NaturalModel();
-                $dni= $_POST["dni"];
-				$nombre= $_POST['nombre'];
-                $apellido= $_POST['apellido'];
-				$direccion= $_POST['direccion'];
-				$telefono= $_POST['telefono'];
+				$cliente->updateCliente_Juridico($ruc,$direccion,$nombre_empresa);
 				
-                //Set all data of post method to object of model
-                $cliente->modificar_Clientes_natural($dni,$nombre,$apellido,$direccion,$telefono);
-            }
+				}
+				
 
-            if($_POST['tipoCliente']=='Juridico'){
+				header('Location:./?ctrl=clientes&acc=listar_juridico');
+			}
+		}
+		public function createOrModifyNatural(){
+			if($_POST){
+				$clave=$_POST['clave'];
+				$dni=$_POST['dni_natural'];
+				$nombre=$_POST['nombres_natural'];
+				$apellidos=$_POST['apellidos_natural'];
+				$direccion=$_POST['direccion_natural'];
+				$telefono=$_POST['telefono_natural'];
+				$cliente = new Cliente_NaturalModel();
+				$direccion2 = new DireccionesModel();
+				//Si esta vacio significa que se quiere ingresar un nuevo registro
+				if($clave=="crear") {
+					$direccion2->createDireccion($direccion);
+					$cliente->createCliente_Natural($dni,$nombre,$apellidos,$telefono);
+				}
+				else {
+					$direccion2->updateDireccion($dni,$direccion);
+					$cliente->updateCliente_Natural($clave,$apellidos,$nombre,$telefono);
+				}
+				header('Location:./?ctrl=clientes&acc=listar_natural');
+			}
+		}
+		public function createOrModifyDireccion(){
+			if($_POST){
+				$clave=$_POST['clave'];
+				$ruc_direc=$_POST['ruc_direccion'];
+				$cod_direc=$_POST['cod_direc'];
+				$direccion=$_POST['direccion_detalle'];
+				$direccion2 = new DireccionesModel();
+				
+				//Si esta vacio significa que se quiere ingresar un nuevo registro		
+				if($clave=="crear") {
+					
+					$direccion2->createDireccion($direccion);
+					$direccion2->relacionarDireccion_juridico($ruc_direc);
+				}
+				else {
+					$direccion2->updateDireccion_juridico($cod_direc,$direccion);
+				}
+				
+				header('Location:./?ctrl=clientes&acc=detalle&nro='. $ruc_direc);
+			}
+		}
+		
+		
+		public function deleteNatural(){
+			if($_GET){
+				$clave=$_GET['clave'];
+				$cliente = new Cliente_NaturalModel();
+				$cliente->deleteCliente_Natural($clave);
+				header('Location:./?ctrl=clientes&acc=listar_natural');
+			}
+		}  
+
+		public function deleteJuridico(){
+			if($_GET){
+				$clave=$_GET['clave'];
+				$cliente = new Cliente_Juridico();
+				$cliente->deleteCliente_Juridico($clave);
+				header('Location:./?ctrl=clientes&acc=listar_juridico');
+			}
+		}		
+		
+		public function deleteDetalle(){
+			if($_GET){
+				$clave=$_GET['clave'];
+				$cod_direc=$_GET['cod'];
+				$Direccion = new DireccionesModel();
+				$Direccion->deleteDireccion($cod_direc);
+				header('Location:./?ctrl=clientes&acc=detalle&nro='.$clave);
+			}
+		}
+		
+       public function detalle(){
+            if($_GET){
                 $cliente=new Cliente_Juridico();
-               $ruc=$_POST['ruc'];
-               $codDomicilioFiscal=$_POST['codDomicilioFiscal'];
-               $nombreEmpresa=$_POST['nombreEmpresa'];
-                //Set all data of post method to object of model
-                $cliente->modificar_Clientes_juridico($ruc,$codDomicilioFiscal,$nombreEmpresa);
+                $nroGuia=$_GET['nro'];
+
+                $result=$cliente->get_cliente_juridico($nroGuia);
             }
-            require_once("./views/Clientes/modificar.php");
-        }
-        public function eliminar(){
-            $cliente=new Cliente();
-            if($_GET['tipoCliente']=='Natural'){
-                $cliente->eliminar($_GET['dni']);
-            }
-            if($_GET['tipoCliente']=='Juridico'){
-                $cliente->eliminar($_GET['ruc']);
-            }
-            header('Location:?ctrl=clientes&acc=listar');
+            require_once('./views/Cliente/detalleJuridico.php');
         }
     }
-?>
+?>	

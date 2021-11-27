@@ -28,7 +28,7 @@
                     <a href="./?ctrl=paginas&acc=inicio" class="navbar-brand">
                         <!-- <img src="img\logo.png" alt="Nifty Logo" class="brand-icon"> -->
                         <div class="brand-title">
-                            <span class="brand-text">GDI</span>
+                            <span class="brand-text">REMIAD</span>
                         </div>
                     </a>
                 </div>
@@ -62,12 +62,10 @@
                                 <div id="mainnav-profile" class="mainnav-profile">
                                     <div class="profile-wrap text-center">
                                         <div class="pad-btm">
-                                            <img class="img-circle img-md" src="img\profile-photos\11.jpeg" alt="Profile Picture">
+                                            
                                         </div>
                                         <a href="#profile-nav" class="box-block" data-toggle="collapse" aria-expanded="false">
     
-                                            <p class="mnp-name">Gabrilel Tuco</p>
-                                            <span class="mnp-desc">gabriel.tuco@ucsm.edu.pe</span>
                                         </a>
                                     </div>
                                 </div>

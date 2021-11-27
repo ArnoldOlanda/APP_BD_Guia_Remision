@@ -47,7 +47,10 @@
 			}
 			return $Devuelve;
 		}
-		
+		public function deleteTransportista($NumLicencia){
+			$resultado=$this->db->prepare("call sp_eliminar_transportista(?)");
+			$resultado->execute([$NumLicencia]);
+		}	
 		
 	}
 ?>

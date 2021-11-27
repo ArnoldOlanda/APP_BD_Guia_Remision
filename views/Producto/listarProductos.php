@@ -28,7 +28,7 @@
                 echo "<td>" . $dato["Unidad_Medida"] . "</td>";
                 echo "<td>" . $dato["Descripcion"] . "</td>";
                 echo "<td class='row'><button class='btn btnUpdateOpenModal'>Modificar</button>";
-                //echo "<button class='btn btnDeleteRow'>Eliminar</button>";
+                echo "<button class='btn btnDeleteRow'>Eliminar</button>";
                 echo "<input type=hidden value='" . $dato['Id_Producto'] . "_" . $dato['Unidad_Medida'] . "_" . $dato['Descripcion'] . "'></td>";
                 echo "</tr>";
             }
@@ -38,6 +38,7 @@
 		<button id="btnOpenModal" class="btn" >Nuevo</button>
     </div>
 </div>
+<input type="hidden" id="nameForm" value="">
 <div class="modal-background">
     <input type="hidden" id="modalPara" value="productos">
 </div>

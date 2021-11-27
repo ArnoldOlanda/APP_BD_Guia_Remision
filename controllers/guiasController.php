@@ -26,7 +26,7 @@
                 $dataClienteJuridico=$clienteJuridico->get_ListaCliente_Juridico();
 
                 foreach ($dataClienteNatural as $value) {
-                    $dataCliente[]=[$value['dni'],$value['nombre']];
+                    $dataCliente[]=[$value['dni'],$value['nombres']];
                 }
                 foreach ($dataClienteJuridico as $value) {
                     $dataCliente[]=[$value['ruc'],$value['nombre_empresa']];
@@ -39,8 +39,13 @@
             $data=[];
             if($_GET){
                 $guia=new Guia_remision();
+                $clienteNatural=new Cliente_NaturalModel();
                 $data=$guia->getGuiasBoleta();
+                $dataClienteNatural=$clienteNatural->get_Clientes_Naturales();
 
+                foreach ($dataClienteNatural as $value) {
+                    $dataCliente[]=[$value['dni'],$value['apellidos']." ".$value['nombres']];
+                }
                 
             }
             require_once('./views/Guia/GuiaBoleta.php');
@@ -88,7 +93,7 @@
                 $dataClienteNatural=$clienteNatural->get_Clientes_Naturales();
                 $dataClienteJuridico=$clienteJuridico->get_ListaCliente_Juridico();
                 foreach ($dataClienteNatural as $value) {
-                    $dataCliente[]=[$value['dni'],$value['nombre']];
+                    $dataCliente[]=[$value['dni'],$value['apellidos']." ".$value['nombres']];
                 }
                 foreach ($dataClienteJuridico as $value) {
                     $dataCliente[]=[$value['ruc'],$value['nombre_empresa']];
@@ -151,7 +156,12 @@
             if($_POST){
                 $filtroNroGuia=$_POST['fNroGuia'];
                 $filtroFecha=$_POST['fFecha'];
-                $filtroCliente=$_POST['fCliente'];
+                if(isset($_POST['fCliente'])){
+                    $filtroCliente=$_POST['fCliente'];
+                }else{
+                    $filtroCliente="";
+                }
+                
 
                 $guia=new Guia_remision();
                 $clienteNatural=new Cliente_NaturalModel();
@@ -181,7 +191,7 @@
                 $dataClienteNatural=$clienteNatural->get_Clientes_Naturales();
                 $dataClienteJuridico=$clienteJuridico->get_ListaCliente_Juridico();
                 foreach ($dataClienteNatural as $value) {
-                    $dataCliente[]=[$value['dni'],$value['nombre']];
+                    $dataCliente[]=[$value['dni'],$value['apellidos']." ".$value['nombres']];
                 }
                 foreach ($dataClienteJuridico as $value) {
                     $dataCliente[]=[$value['ruc'],$value['nombre_empresa']];
@@ -194,7 +204,12 @@
             if($_POST){
                 $filtroNroFactura=$_POST['fNroFactura'];
                 $filtroFecha=$_POST['fFecha'];
-                $filtroCliente=$_POST['fCliente'];
+                if(isset($_POST['fCliente'])){
+                    $filtroCliente=$_POST['fCliente'];
+                }else{
+                    $filtroCliente="";
+                }
+                
 
                 $guia=new Guia_remision();
                 $clienteJuridico=new Cliente_Juridico();
@@ -226,7 +241,12 @@
             if($_POST){
                 $filtroNroBoleta=$_POST['fNroBoleta'];
                 $filtroFecha=$_POST['fFecha'];
-                $filtroCliente=$_POST['fCliente'];
+                if(isset($_POST['fCliente'])){
+                    $filtroCliente=$_POST['fCliente'];
+                }else{
+                    $filtroCliente="";
+                }
+                
 
                 $guia=new Guia_remision();
                 $clienteNatural=new Cliente_NaturalModel();
@@ -245,10 +265,10 @@
                     $fechaArray=explode('-',$filtroFecha);
                     $data=$guia->getGuiasBoletaFiltroFechaCliente($fechaArray[1],$fechaArray[0],$filtroCliente);
                 }
-                
+                $dataCliente=[];
                 $dataClienteNatural=$clienteNatural->get_Clientes_Naturales();
                 foreach ($dataClienteNatural as $value) {
-                    $dataCliente[]=[$value['dni'],$value['nombre']];
+                    $dataCliente[]=[$value['dni'],$value['apellidos']." ".$value['nombres']];
                 }
             }
             require_once('./views/Guia/GuiaBoleta.php');

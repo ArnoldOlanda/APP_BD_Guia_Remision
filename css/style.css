@@ -1,3 +1,16 @@
+.content-mision-vision{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.content-mision-vision p{
+    width: 48%;
+    box-sizing: border-box;
+    padding: 5px;
+    border-radius: 5px;
+    border:1px solid gray;
+}
+
 table{
     font-size:12px;
     border-collapse: collapse;

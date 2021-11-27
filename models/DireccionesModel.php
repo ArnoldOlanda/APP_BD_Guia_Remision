@@ -20,19 +20,31 @@
 			}
 			return $data;
 		}
-		public function get_ListaDireccionCodigo($CodigoDire)
+		public function createDireccion($direc)
 		{
-			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[create procedure Lista_DireccionPorCodigo(IN CodigoDire int) select * from Direcciones where Codigo = CodigoDire;]
-			$resultado = $this->db->preparate("call Lista_DireccionPorCodigo("+$CodigoDire+")");
-			$resultado->execute($resultado,[$CodigoDire]);
-			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
-			{
-				$devudire[] = $row;
-			}
-			return $devudire;
-
+			$resultado=$this->db->prepare("call sp_insertar_direccion(?)");
+			$resultado->execute([$direc]);
+		}
+		
+		public function updateDireccion($dni,$direc){
+			$resultado=$this->db->prepare("call sp_actualizar_direccion(?,?)");
+			$resultado->execute([$dni,$direc]);
 		}
 
+		public function updateDireccion_juridico($cod_direc,$direc){
+			$resultado=$this->db->prepare("call sp_actualizar_direccion_juridico(?,?)");
+			$resultado->execute([$cod_direc,$direc]);
+		}
 
+		public function relacionarDireccion_juridico($ruc){
+			
+			$resultado=$this->db->prepare("call sp_relacionar_direccion_juridico(?)");
+			$resultado->execute([$ruc]);
+		}
+		
+		public function deleteDireccion($cod){
+			$resultado=$this->db->prepare("call sp_eliminar_direccion(?)");
+			$resultado->execute([$cod]);
+		}		
 	}
 ?>

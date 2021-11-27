@@ -27,7 +27,7 @@
                         echo "<td>" . $dato["Marca"] . "</td>";
                         echo "<td>" . $dato["Nro_Constancia_Inscripcion"] . "</td>";
                         echo "<td class='row'><button class='btn btnUpdateOpenModal'>Modificar</button>";
-                        //echo "<button class='btn btnDeleteRow'>Eliminar</button>";
+                        echo "<button class='btn btnDeleteRow'>Eliminar</button>";
                         echo "<input type=hidden value='" . $dato['Placa'] . "_" . $dato['Marca'] . "_" . $dato['Nro_Constancia_Inscripcion'] . "'></td>";
                         echo "</tr>";
                     }
@@ -37,6 +37,7 @@
          <button id="btnOpenModal" class="btn">Nuevo</button>
      </div>
  </div>
+ <input type="hidden" id="nameForm" value="">
  <div class="modal-background">
      <input type="hidden" id="modalPara" value="vehiculos">
  </div>

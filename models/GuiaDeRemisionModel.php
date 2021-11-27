@@ -1,5 +1,5 @@
 <?php
-	include_once("../dbConnection.php");
+	include_once("./dbConnection.php");
 	class Guia_remision {
 		private $db;
 		
