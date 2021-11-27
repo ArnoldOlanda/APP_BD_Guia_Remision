@@ -2,9 +2,9 @@
 <div id="page-head">
     <div >
         <h3 style="font-size:30px" class="pad-all text-center">Consultar Guia Por Factura</h3>
-		<form action="./?ctrl=guias&acc=facturaFiltrar" method="POST" style="padding: 0% 2.6%;">
+		<form action="./?ctrl=guias&acc=facturaFiltrar" method="POST" class="form-filtro">
             </br>
-            Nro Factura: <input type="text" name="fNroFactura" style="color:black"> 
+            Nro Factura: <input type="text" name="fNroFactura" style="color:black" autocomplete="off"> 
             Fecha: <input type="month" name="fFecha" id="Fecha_Emision" style="color:black"> 
             Cliente: <select name="fCliente" style="color:black">
             <option value="" selected disabled>Seleccione un cliente</option>

@@ -1,6 +1,7 @@
 <?php
     require_once("./models/Cliente_NaturalModel.php");
     require_once("./models/ClienteJuridicoModel.php");
+    require_once("./models/DireccionClienteJuridicoModel.php");
 
     class ClientesController{
         public function listar_natural(){
@@ -18,6 +19,15 @@
             $dataJ=$cliente->get_ListaCliente_Juridico();
             
             require_once("./views/Cliente/listarClienteJuridico.php");
+        }
+        public function listarDireccionesJuridico(){
+            // if($_POST){
+            //     $rucJ=$_POST['destinatario'];
+            //     $direccionesJ=new DireccionesJuridicoModel();
+            //     $data=$direccionesJ->getDireccionesClienteJuridicoRUC('43454345');
+                
+            //     echo json_encode("recibido");
+            // }
         }
 
         public function insertar(){

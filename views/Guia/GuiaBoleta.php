@@ -2,9 +2,9 @@
 <div id="page-head">
     <div >
         <h3 style="font-size:30px" class="pad-all text-center">Consultar Guia Por Boleta</h3>
-		<form action="./?ctrl=guias&acc=boletaFiltrar" method="POST" style="padding: 0% 2.6%;">
+		<form action="./?ctrl=guias&acc=boletaFiltrar" method="POST" class="form-filtro">
             </br>
-            Nro Boleta: <input type="text" name="fNroBoleta" style="color:black"> 
+            Nro Boleta: <input type="text" name="fNroBoleta" style="color:black" autocomplete="off"> 
             Fecha: <input type="month" name="fFecha" id="Fecha_Emision" style="color:black"> 
             Cliente: <select name="fCliente" style="color:black">
             <option value="" selected disabled>Seleccione un cliente</option>

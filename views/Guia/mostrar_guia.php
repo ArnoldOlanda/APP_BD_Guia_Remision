@@ -2,9 +2,9 @@
 <div id="page-head">
     <div >
         <h3 style="font-size:30px" class="pad-all text-center">Guias de Remision</h3>
-		<form action="./?ctrl=guias&acc=filtrar" method="POST" style="padding: 0% 2.6%;">
+		<form action="./?ctrl=guias&acc=filtrar" method="POST" class="form-filtro">
             </br>
-            Nro Guia: <input type="text" name="fNroGuia" style="color:black"> 
+            Nro Guia: <input type="text" name="fNroGuia" style="color:black" autocomplete="off"> 
             Fecha: <input type="month" name="fFecha" id="Fecha_Emision" style="color:black"> 
             Cliente: <select name="fCliente" style="color:black">
             <option value="" selected disabled>Seleccione un cliente</option>
@@ -31,8 +31,6 @@
                 <th>Cliente</th>
                 <th>Punto partida</th>
                 <th>Punto llegada</th>
-         
-               
             </tr>
         </thead>
         <tbody>

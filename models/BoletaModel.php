@@ -1,30 +1,31 @@
 <?php
+	require_once('../dbConnection.php');
 	class BoletaModel{
 		
 		private $db;//nombre de base de datos
 		
 		public function __construct(){
-			$this->db=DB::CrearInstancia();//conecta con la base de datos
+			$this->db=BD::CrearInstancia();//conecta con la base de datos
 		}
 
-		public function get_ListaBoleta(){
-			$sql = "call Lista_Boleta();";
-			$resultado = $this->db->query($sql);
+		public function getBoletaNro($nroBoleta){
+			$data=[];
+			$resultado = $this->db->prepare("call sp_busca_boleta_numero(?)");
+			$resultado->execute([$nroBoleta]);
 			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) {
-				$ListBoletas[] = $row;
+				$data[] = $row;
 			}
-			return $ListBoletas;
+			return $data;
 		}
-
-		public function get_BoletaEspecifica($NumBoleta)
-		{
-			$resultado = $this->db->preparate("call Consulta_BoletaEspecifica('"+$NumBoleta+"');");
-			$resultado->execute($resultado,[$NumBoleta]);
-			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) {
-				$Devuelve[] = $row;
-			}
-			return $Devuelve;
-		}
+		
+		// public function get_ListaBoleta(){
+		// 	$sql = "call Lista_Boleta();";
+		// 	$resultado = $this->db->query($sql);
+		// 	while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) {
+		// 		$ListBoletas[] = $row;
+		// 	}
+		// 	return $ListBoletas;
+		// }
 
 		
 	}

@@ -1,6 +1,6 @@
 <?php
 	include_once("dbConnection.php");
-	class Tipo_Comprobante {
+	class TipoComprobanteModel {
 		private $db;
 		
 
@@ -8,16 +8,16 @@
 			$this->db = BD::crearInstancia();
 			
 		}
-		public function get_ListaTipoComprobante()
+		public function getAllTipoComprobante()
 		{
-			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[create procedure Lista_TipoComprobante() select * from tipo_comprobante;]
-			$sql = "call Lista_TipoComprobante();";
+			$data=[];
+			$sql = "call sp_lista_tipo_comprobante();";
 			$resultado = $this->db->query($sql);
 			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
 			{
-				$devuTipoC[] = $row;
+				$data[] = $row;
 			}
-			return $devuTipoC;
+			return $data;
 		}
 
 	}

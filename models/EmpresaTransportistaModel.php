@@ -1,6 +1,6 @@
 <?php
 	include_once("dbConnection.php");
-	class Empresa_Transportista {
+	class EmpresaTransportistaModel {
 		private $db;
 		
 
@@ -8,16 +8,16 @@
 			$this->db = BD::crearInstancia();
 			
 		}
-		public function get_EmpresaTransportista()
+		public function getAllEmpresaTransportista()
 		{
-			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[create procedure Lista_EmpresaTransportista() select * from Empresa_Transportista;]
-			$sql = "call Lista_EmpresaTransportista();";
+			$data=[];
+			$sql = "call sp_lista_empresa_transportista();";
 			$resultado = $this->db->query($sql);
 			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
 			{
-				$devuEmpreT[] = $row;
+				$data[] = $row;
 			}
-			return $devuEmpreT;
+			return $data;
 		}
 		public function get_EmpresaTransportistaPorRUC($RUCT)
 		{

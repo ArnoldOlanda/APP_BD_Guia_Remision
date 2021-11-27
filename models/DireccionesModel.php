@@ -1,6 +1,6 @@
 <?php
 	include_once("dbConnection.php");
-	class Direcciones {
+	class DireccionesModel {
 		private $db;
 		
 
@@ -9,16 +9,16 @@
 		}
 
 
-		public function get_ListaDirecciones()
+		public function getAllDirecciones()
 		{
-			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[create procedure Lista_Direcciones() select * from Direcciones;]
-			$sql = "call Lista_Direcciones();";
+			$data=[];
+			$sql = "call sp_lista_direcciones();";
 			$resultado = $this->db->query($sql);
 			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
 			{
-				$devudire[] = $row;
+				$data[] = $row;
 			}
-			return $devudire;
+			return $data;
 		}
 		public function get_ListaDireccionCodigo($CodigoDire)
 		{

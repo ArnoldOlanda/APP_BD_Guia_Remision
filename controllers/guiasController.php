@@ -2,6 +2,13 @@
     require_once('./models/GuiaDeRemisionModel.php');
     require_once('./models/Cliente_NaturalModel.php');
     require_once('./models/ClienteJuridicoModel.php');
+    require_once('./models/MotivoTrasladoModel.php');
+    require_once('./models/DireccionesModel.php');
+    require_once('./models/VehiculoModel.php');
+    require_once('./models/TransportistaModel.php');
+    require_once('./models/ProductoModel.php');
+    require_once('./models/EmpresaTransportistaModel.php');
+    require_once('./models/TipoComprobanteModel.php');
 
     class GuiasController
     {
@@ -13,10 +20,11 @@
 
                 $clienteNatural=new Cliente_NaturalModel();
                 $clienteJuridico=new Cliente_Juridico();
-
+                
                 $data=$guia->getAllGuias();
                 $dataClienteNatural=$clienteNatural->get_Clientes_Naturales();
                 $dataClienteJuridico=$clienteJuridico->get_ListaCliente_Juridico();
+
                 foreach ($dataClienteNatural as $value) {
                     $dataCliente[]=[$value['dni'],$value['nombre']];
                 }
@@ -53,7 +61,6 @@
             }
             require_once('./views/Guia/GuiaFactura.php');
         }
-
         public function detalle(){
             if($_GET){
                 $guia=new Guia_remision();
@@ -64,13 +71,80 @@
             require_once('./views/Guia/detalle.php');
         }
         public function insertar()
-        {
-            if($_POST){
-                //$guia=new Guia_remision();
-                //$guia->registrar_BD();
-                header('Location:index');
+        {   
+            $mainData=[];
+            if($_GET){
+                $direccion=new DireccionesModel();
+                $motivoTraslado= new MotivoTrasladoModel();
+                $clienteNatural=new Cliente_NaturalModel();
+                $clienteJuridico=new Cliente_Juridico();
+                $vehiculo=new VehiculoModel();
+                $conductor=new TransportistaModel();
+                $producto=new ProductoModel();
+                $empresaTransportista=new EmpresaTransportistaModel();
+                $tipoComprobante=new TipoComprobanteModel();
+
+                $mainData[]=$direccion->getAllDirecciones();
+                $dataClienteNatural=$clienteNatural->get_Clientes_Naturales();
+                $dataClienteJuridico=$clienteJuridico->get_ListaCliente_Juridico();
+                foreach ($dataClienteNatural as $value) {
+                    $dataCliente[]=[$value['dni'],$value['nombre']];
+                }
+                foreach ($dataClienteJuridico as $value) {
+                    $dataCliente[]=[$value['ruc'],$value['nombre_empresa']];
+                }
+                $mainData[]=$dataCliente;
+                $mainData[]=$vehiculo->get_Lista_vehiculos();
+                $mainData[]=$conductor->getAllTransportistas();
+                $mainData[]=$producto->get_Lista_Productos();
+                $mainData[]=$empresaTransportista->getAllEmpresaTransportista();
+                $mainData[]=$tipoComprobante->getAllTipoComprobante();
+                $mainData[]=$motivoTraslado->getAllMotivosTraslado();
             }
             require_once('./views/Guia/ingresarGuia.php');
+        }
+        public function registrar(){
+            if($_POST){
+                $nroGuia=$_POST['nroGuia'];
+                $fechaEmision=explode('-',$_POST['fechaEmision']);
+                $fe_anio=$fechaEmision[0];
+                $fe_mes=$fechaEmision[1];
+                $fe_dia=$fechaEmision[2];
+
+                $fechaTraslado=explode('-',$_POST['fechaTraslado']);
+                $ft_anio=$fechaTraslado[0];
+                $ft_mes=$fechaTraslado[1];
+                $ft_dia=$fechaTraslado[2];
+
+                $puntoPartida=$_POST['puntoPartida'];
+                $puntoLlegada=$_POST['puntoLlegada'];
+                $destinatario=$_POST['destinatario'];
+                $placa=explode('_',$_POST['placa'])[0];
+
+                $licenciaConducir=$_POST['nombreChofer'];
+                $nroFilas=$_POST['totalFilasDetalle'];
+                $dataProductos=[];
+                for ($i=1; $i <= $nroFilas; $i++) { 
+                    $dataProductos[]=[explode('_',$_POST['producto'.$i])[0],$_POST['cantidad'.$i],$_POST['peso'.$i]];
+                }
+                $nombreTransportista=$_POST['nombreTransportista'];
+                $tipoComprobante=$_POST['tipoComprobante'];
+                $nroComprobante=$_POST['nroComprobante'];
+                $motivoTraslado=$_POST['motivoTraslado'];
+                $firmaResponsable=$_POST['firmaResponsable'];
+                $firmaCliente=$_POST['firmaCliente'];
+                if($_POST['nombreConfCliente']=="") $nombreConfCliente=0;
+                else $nombreConfCliente=1;
+                
+                $guia=new Guia_remision();
+                $guia->ingresarGuia($nroGuia,$fe_anio,$fe_dia,$fe_mes,$ft_anio,$ft_dia,$ft_mes,$puntoPartida,$puntoLlegada,$licenciaConducir,
+                $placa,$nombreTransportista,$tipoComprobante,$motivoTraslado,$firmaResponsable,$firmaCliente,$nombreConfCliente,
+                $nroComprobante,$nroComprobante,$destinatario,$destinatario,$dataProductos);
+
+
+                header('Location:./?ctrl=guias&acc=listar');
+            }
+            //require_once('./views/Guia/ingresarGuia.php');
         }
         public function filtrar()
         {
@@ -147,7 +221,6 @@
             }
             require_once('./views/Guia/GuiaFactura.php');
         }
-
         public function boletaFiltrar()
         {
             if($_POST){

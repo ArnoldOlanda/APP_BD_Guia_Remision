@@ -1,6 +1,6 @@
 <?php
 	include_once("dbConnection.php");
-	class Motivo_Traslado {
+	class MotivoTrasladoModel {
 		private $db;
 		
 
@@ -8,16 +8,16 @@
 			$this->db = BD::crearInstancia();
 			
 		}
-		public function get_ListaMotivoTraslado()
+		public function getAllMotivosTraslado()
 		{
-			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[create procedure Lista_MotivoTraslado() select * from motivo_traslado;]
-			$sql = "call Lista_MotivoTraslado();";
+			$result=[];
+			$sql = "call sp_lista_motivo_traslado();";
 			$resultado = $this->db->query($sql);
 			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
 			{
-				$devuMotivoT[] = $row;
+				$result[] = $row;
 			}
-			return $devuMotivoT;
+			return $result;
 		}
 
 	}

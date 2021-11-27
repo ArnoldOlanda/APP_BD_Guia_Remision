@@ -1,6 +1,6 @@
 <?php
-	include_once("dbConnection.php");
-	class Direccion_Cliente_Juridico {
+	include_once("../dbConnection.php");
+	class DireccionesJuridicoNaturalModel {
 		private $db;
 		
 
@@ -20,17 +20,29 @@
 			}
 			return $devuDireccionCliJuri;
 		}
-		public function get_ListaDireccion_Cliente_JuridicoPorRUC($RUCD)
+		public function getDireccionesClienteJuridicoRUC($RUCD)
 		{
-			//ESTOS ES LO QUE VA EN LA BASE DE DATOS[create procedure Lista_DireccionCliJuridicoRUC(IN RUCD char(11)) select j.RUC, j.Cod_Direccion, d.Direccion from direcciones_cliente_juridico j inner join direcciones d on j.Cod_Direccion = d.codigo where RUC = RUCD;]
-			$resultado = $this->db->preparate("call Lista_DireccionCliJuridicoRUC('"+$RUCD+"');");
-			$resultado->execute($resultado,[$RUCD]);
+			$result=[];
+			$resultado = $this->db->prepare("call sp_lista_direccion_cliente_juridico_ruc(?);");
+			$resultado->execute([$RUCD]);
 			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
 			{
-				$devuDireccionCliJuri[] = $row;
+				$result[] = $row;
 			}
-			return $devuDireccionCliJuri;
+			return $result;
 		}
+		public function getDireccionesClienteNaturalDni($dni)
+		{
+			$result=[];
+			$resultado = $this->db->prepare("call sp_buscar_direccion_cliente_natural_dni(?);");
+			$resultado->execute([$dni]);
+			while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) 
+			{
+				$result[] = $row;
+			}
+			return $result;
+		}
+		
 
 	}
 ?>
